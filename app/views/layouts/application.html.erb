@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Site</title>
+
+  	<%= render "layouts/materialize/materialize_css" %>
+	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+</head>
+<body>	
+	<%= render "layouts/menu" %>
+	<main>
+		<%= yield %>
+	</main>
+	<%= render "layouts/footer" %>
+
+	<%= render "layouts/materialize/materialize_js" %>
+</body>
+	<%= javascript_include_tag "parallax" %>
+</html>

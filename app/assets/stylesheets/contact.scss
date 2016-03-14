@@ -1,0 +1,33 @@
+// Place all the styles related to the contact controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* Inputs focus and labels */
+.input-field input[type=text]:focus + label 
+{
+	color: #ffc107;
+}
+
+.input-field input[type=text]:focus 
+{
+	border-bottom: 1px solid #ffc107;
+	box-shadow: 0 1px 0 0 #ffc107;
+}
+
+/* Textarea focus and label */
+.input-field textarea:focus:not([readonly]) + label 
+{
+	color: #ffc107;
+}
+
+.input-field textarea:focus:not([readonly])
+{
+	border-bottom: 1px solid #ffc107;
+ 	box-shadow: 0 1px 0 0 #ffc107;
+}
+
+/* Icon focus */
+.input-field .prefix.active 
+{
+	color: #ffc107;
+}
