@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get '/equipe' => 'equipe#index'
+
   get '/news' => 'news#index'
 
   get '/partenaires' => 'partenaires#index'
