@@ -53,6 +53,14 @@ footer ul li a img
   will-change: width, height;
 }
 
+/* Size of dropdown content for smaller screens */
+@media (max-width: 1620px) {
+  .dropdown-content 
+  {
+    min-width: 11vw;
+  }
+}
+
 nav ul a,
 nav .brand-logo 
 {
