@@ -6,7 +6,6 @@ Rails.application.routes.draw do
 
   get '/partenaires' => 'partenaires#index'
 
-  post '/contact' => 'contact#index'
   get '/contact' => 'contact#index'
 
   # get 'index/home'
