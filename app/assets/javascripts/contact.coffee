@@ -12,6 +12,7 @@ $(document).on 'page:change', ->
     return
 
   clickButton = ->
+    sendMail()
     swal 'Message envoyé !', 'Nous vous répondrons dans les plus bref délais', 'success'
     sweetButton = document.getElementsByClassName('confirm')[0]
     sweetButton.addEventListener 'click', sweetValidate
@@ -22,7 +23,6 @@ $(document).on 'page:change', ->
     return
 
   sweetValidate = ->
-    sendMail()
     window.location.replace '/'
     return
 
