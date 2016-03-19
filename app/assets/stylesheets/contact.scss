@@ -33,6 +33,19 @@
 }
 
 
+img.circle
+{
+  height: 100px;
+}
+
+img.circle:hover
+{
+  border: solid 1px #CCC;
+  -moz-box-shadow: 2px 2px 0px #999; 
+  -webkit-box-shadow: 2px 2px 0px #999; 
+  box-shadow: 2px 2px 0px #999;
+}
+
 /* Sweet alert jquery */
 body.stop-scrolling {
   height: 100%;
