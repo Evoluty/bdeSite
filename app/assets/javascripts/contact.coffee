@@ -37,4 +37,5 @@ $(document).on 'page:change', ->
     mail.addEventListener 'input', manageButton
     msg.addEventListener 'input', manageButton
     button.addEventListener 'click', clickButton
+
 return
