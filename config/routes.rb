@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get '/equipe' => 'equipe#index'
+  get '/clubs' => 'clubs#index'
 
   get '/news' => 'news#index'
 

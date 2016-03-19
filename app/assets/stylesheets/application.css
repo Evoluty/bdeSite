@@ -37,6 +37,11 @@ footer ul li a img
   max-width: 13px;
 }
 
+footer > div > div > div > img
+{
+  height: 80px;
+}
+
 .dropdown-content 
 {
   background-color: #FFFFFF;
