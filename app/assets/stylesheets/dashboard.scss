@@ -1,0 +1,35 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#dashTab ul.tabs
+{
+	flex-direction: column;
+	height: 100%;
+	width: auto;
+}
+
+#dashTab .tabs li.tab
+{
+	width: 100%;
+}
+
+#dashTab ul.tabs .indicator
+{
+	display: none;
+}
+
+#dashMain
+{
+	margin-top: 20px;
+}
+
+#dashTab ul.tabs
+{
+	background-color: #f5f5f5;
+}
+
+#dashTab ul.tabs li a.active
+{
+	background-color: #ffab91;
+}

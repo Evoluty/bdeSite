@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get '/admin' => 'dashboard#index'
+
   get '/clubs' => 'clubs#index'
 
   get '/news' => 'news#index'
