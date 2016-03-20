@@ -23,7 +23,7 @@ $(document).on 'page:change', ->
     return
 
   sweetValidate = ->
-    window.location.replace '/'
+    window.location.replace '/#section1'
     return
 
   if window.location.pathname == '/contact'
