@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get '/clubs' => 'clubs#index'
 
   get '/news' => 'news#index'
+  get '/news/create' => 'news#create'
+  post '/news/create' => 'news#create'
+  get '/news/delete/:id' => 'news#delete'
 
   get '/partenaires' => 'partenaires#index'
 

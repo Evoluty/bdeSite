@@ -1,0 +1,22 @@
+<div class="container">
+	<div class="section">
+		<div class="row center">
+			<%= form_tag "/news/create", method: "post", class: "col l6 offset-l3 m8 offset-m2 s12" do %>
+
+				<div class="input-field">
+					<%= text_field_tag 'title', nil, class: 'validate required' %>
+					<%= label_tag "title", "Titre de l'actualité" %>
+				</div>
+
+				<div class="input-field">
+					<%= text_area_tag 'text', nil, class: 'validate required materialize-textarea' %>
+					<%= label_tag "text", "Texte de l'actualité" %>
+				</div>
+				<br>
+				<button class="btn waves-effect waves-light amber darken-4" type="submit" name="action">Ajouter
+					<i class="material-icons right">send</i>
+				</button>
+			<% end %>
+		</div>
+	</div>
+</div>
