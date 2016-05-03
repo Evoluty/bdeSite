@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+puts RUBY_VERSION
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
@@ -37,6 +38,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pg'
 # Will_paginate for pagination
 gem 'will_paginate', '~> 3.1.0'
+# Mailgun
+gem 'mailgun-ruby', '~> 1.1.0', require: 'mailgun'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

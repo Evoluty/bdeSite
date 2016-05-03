@@ -1,11 +1,11 @@
 <div class="row" id="dashMain">
-	<div class="col s1">
+	<div class="col">
 		<div id="dashTab">
 		  <ul class="tabs">
-		    <li class="tab"><a href="#test1" class="active">News</a></li>
-		    <li class="tab"><a href="#test2">Clubs</a></li>
-		    <li class="tab"><a href="#test3">Partenaires</a></li>
-		    <li class="tab"><a href="#test4">Bde</a></li>
+		    <li class="tab"><a href="#test1" class="active col">News</a></li>
+		    <li class="tab"><a href="#test2" class="col">Clubs</a></li>
+		    <li class="tab"><a href="#test3" class="col">Partenaires</a></li>
+		    <li class="tab"><a href="#test4" class="col">Bde</a></li>
 		  </ul>
 		</div>
 	</div>
@@ -16,32 +16,36 @@
 					(function($){
 						$(function(){
 					 		Materialize.toast('<%= msg %>', 3000, 'rounded <%= name %>');
-						}); // end of document ready
+						}); // end of docum	ent ready
 					})(jQuery); // end of jQuery name space
 				});
 			</script>
 		<% end -%>
 		<div id="test1" class="col s12">
 			<div class="center">
-				<table>
-			        <thead>
-			          <tr>
-			              <th data-field="title">Titre</th>
-			              <th data-field="text">Texte</th>
-			              <th data-field="img">Date de publication</th>
-			          </tr>
-			        </thead>
+				<% if @news.size == 0 %>
+					<p class="center">Aucune actualité n'a été publiée ! Utilisez le bouton ci-dessous pour en publier !</p>
+				<% else %>
+					<table>
+				        <thead>
+				          <tr>
+				              <th data-field="title">Titre</th>
+				              <th data-field="text">Texte</th>
+				              <th data-field="img">Date de publication</th>
+				          </tr>
+				        </thead>
 
-			        <tbody>
-						<% for @new in @news %>
-							<tr>
-								<td><%= @new.title %></td>
-								<td><%= @new.text %></td>
-								<td><%= @new.created_at.strftime("%d-%m-%Y %H:%M") %></td>
-								<td><a href="/news/delete/<%= @new.id.to_s %>">Supprimer</a></td>
-						<% end %>
-					</tbody>
-				</table>
+				        <tbody>
+							<% for @new in @news %>
+								<tr>
+									<td><%= @new.title %></td>
+									<td><%= @new.text %></td>
+									<td><%= @new.created_at.strftime("%d-%m-%Y %H:%M") %></td>
+									<td><a href="/news/delete/<%= @new.id.to_s %>">Supprimer</a></td>
+							<% end %>
+						</tbody>
+					</table>
+				<% end %>
 				<br>
 				<a class="waves-effect waves-light btn" href="/news/create">Ajouter une actualité</a>
 			</div>

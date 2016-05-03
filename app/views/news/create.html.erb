@@ -13,7 +13,7 @@
 		<% end %>
 		<div class="row center">
 			<h3> Ajouter une actualité </h3>
-			<%= form_tag "/news/create", method: "post", class: "col l6 offset-l3 m8 offset-m2 s12" do %>
+			<%= form_tag "/news/add", method: "post", class: "col l6 offset-l3 m8 offset-m2 s12" do %>
 
 				<div class="input-field">
 					<%= text_field_tag 'title', nil, class: 'validate required' %>
