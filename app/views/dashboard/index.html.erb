@@ -10,6 +10,17 @@
 		</div>
 	</div>
 	<div class="col s8 offset-s1">
+		<% flash.each do |name, msg| -%>
+			<script type="text/javascript">
+				$(document).ready(function () {
+					(function($){
+						$(function(){
+					 		Materialize.toast('<%= msg %>', 3000, 'rounded <%= name %>');
+						}); // end of document ready
+					})(jQuery); // end of jQuery name space
+				});
+			</script>
+		<% end -%>
 		<div id="test1" class="col s12">
 			<div class="center">
 				<table>

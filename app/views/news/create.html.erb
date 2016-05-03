@@ -1,6 +1,18 @@
 <div class="container">
 	<div class="section">
+		<% if flash[:alert] %>
+			<script type="text/javascript">
+				$(document).ready(function () {
+					(function($){
+						$(function(){
+					 		Materialize.toast('<%= flash[:alert] %>', 3000, 'rounded alert');
+						}); // end of document ready
+					})(jQuery); // end of jQuery name space
+				});
+			</script>
+		<% end %>
 		<div class="row center">
+			<h3> Ajouter une actualité </h3>
 			<%= form_tag "/news/create", method: "post", class: "col l6 offset-l3 m8 offset-m2 s12" do %>
 
 				<div class="input-field">
