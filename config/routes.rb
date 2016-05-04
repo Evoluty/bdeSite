@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
 
-<<<<<<< HEAD
   devise_for :users, :skip => [:registrations]
-=======
+
   # Admin
->>>>>>> c0177704951e3dc308927fd4f2285b545c4cb51d
   get '/admin' => 'dashboard#index'
 
   # Clubs
