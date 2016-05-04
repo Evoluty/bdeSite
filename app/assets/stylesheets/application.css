@@ -153,6 +153,42 @@ div .parallax > img
   font-size: inherit;
 }
 
+.italic
+{
+  font-style: italic;
+}
+
+.small
+{
+  font-size: 0.8em;
+}
+
+#toast-container
+{
+  top: 10%;
+  left: 35%;
+  right: 35%;
+  text-align: center;
+}
+
+.toast
+{
+  display: block;
+  float: none;
+}
+
+.alert
+{
+  color: #a94442;
+  background-color: #f2dede;
+}
+
+.notice
+{
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+
 footer.page-footer 
 {
   margin: 0;

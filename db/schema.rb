@@ -11,11 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160503141813) do
+=======
+ActiveRecord::Schema.define(version: 20160420132751) do
+>>>>>>> c0177704951e3dc308927fd4f2285b545c4cb51d
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
   create_table "clubs", force: :cascade do |t|
     t.string   "nom"
     t.text     "description"
@@ -42,4 +47,13 @@ ActiveRecord::Schema.define(version: 20160503141813) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+=======
+  create_table "news", force: :cascade do |t|
+    t.string   "title"
+    t.string   "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+>>>>>>> c0177704951e3dc308927fd4f2285b545c4cb51d
 end

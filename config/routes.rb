@@ -1,15 +1,27 @@
 Rails.application.routes.draw do
 
+<<<<<<< HEAD
   devise_for :users, :skip => [:registrations]
+=======
+  # Admin
+>>>>>>> c0177704951e3dc308927fd4f2285b545c4cb51d
   get '/admin' => 'dashboard#index'
 
+  # Clubs
   get '/clubs' => 'clubs#index'
 
+  # News
   get '/news' => 'news#index'
+  get '/news/create' => 'news#create'
+  post '/news/add' => 'news#add'
+  get '/news/delete/:id' => 'news#delete'
 
+  # Partenaires
   get '/partenaires' => 'partenaires#index'
 
+  # Contact
   get '/contact' => 'contact#index'
+  post '/contact/send' => 'contact#sendMail'
 
   # get 'home/index'
 

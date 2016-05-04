@@ -13,17 +13,31 @@ $(document).on 'page:change', ->
 
   clickButton = ->
     sendMail()
-    swal 'Message envoyé !', 'Nous vous répondrons dans les plus bref délais', 'success'
-    sweetButton = document.getElementsByClassName('confirm')[0]
-    sweetButton.addEventListener 'click', sweetValidate
-    false
-
-  sendMail = ->
-    
     return
 
+  sendMail = ->
+      token = document.querySelector('input[name="authenticity_token"]');
+      $.ajax(
+        method: 'POST'
+        url: '/contact/send'
+        data:
+          authenticity_token: token.value
+          name: name.value
+          objet: objet.value
+          mail: mail.value
+          msg: msg.value)
+        .done(->
+          swal 'Message envoyé !', 'Nous vous répondrons dans les plus bref délais', 'success'
+          sweetButton = document.getElementsByClassName('confirm')[0]
+          sweetButton.addEventListener 'click', sweetValidate  
+          )
+        .fail ->
+          swal 'Erreur !', 'Le message n\'a pas pu être envoyé !', 'error'
+          sweetButton = document.getElementsByClassName('confirm')[0]
+          sweetButton.addEventListener 'click', sweetValidate
+        return
+
   sweetValidate = ->
-    window.location.replace '/#section1'
     return
 
   if window.location.pathname == '/contact'
