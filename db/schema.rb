@@ -16,13 +16,19 @@ ActiveRecord::Schema.define(version: 20160503141813) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-
   create_table "clubs", force: :cascade do |t|
     t.string   "nom"
     t.text     "description"
     t.string   "image"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "news", force: :cascade do |t|
+    t.string   "title"
+    t.string   "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -42,13 +48,5 @@ ActiveRecord::Schema.define(version: 20160503141813) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-
-  create_table "news", force: :cascade do |t|
-    t.string   "title"
-    t.string   "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
 end
