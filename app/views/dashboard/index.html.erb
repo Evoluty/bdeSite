@@ -6,6 +6,7 @@
 		    <li class="tab"><a href="#test2">Clubs</a></li>
 		    <li class="tab"><a href="#test3">Partenaires</a></li>
 		    <li class="tab"><a href="#test4">Bde</a></li>
+		    <li class="tab"><a href="#test5">Users</a></li>
 		  </ul>
 		</div>
 	</div>
@@ -132,7 +133,17 @@
 		          </tr>
 		        </tbody>
 		      </table>
+		</div>
 
+		<div id="test5" class="col s12">
+			<%= form_for("user", :url => user_session_path) do |f| %>
+				<%= f.text_field :email %>
+				<%= f.password_field :password %>
+				<%= f.check_box :remember_me %>
+				<%= f.label :remember_me %>
+				<%= f.submit 'Sign in' %>
+				<%= link_to "Forgot your password?", new_password_path('user') %>
+			<% end %> 
 		</div>
 	</div>
 </div>

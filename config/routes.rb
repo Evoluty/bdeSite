@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users, :skip => [:registrations]
   get '/admin' => 'dashboard#index'
 
   get '/clubs' => 'clubs#index'
