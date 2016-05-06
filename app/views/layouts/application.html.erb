@@ -8,7 +8,7 @@
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	<%= csrf_meta_tags %>
 </head>
-<body>	
+<body>
 	<%= render "layouts/menu" %>
 	<main>
 		<%= yield %>
@@ -18,4 +18,7 @@
 	<%= render "layouts/materialize/materialize_js" %>
 </body>
 	<%= javascript_include_tag "parallax" %>
+	<%= javascript_include_tag "DTjquery" %>
+	<%= javascript_include_tag "DTlayout" %>
+	<%= javascript_include_tag "DTmain" %>
 </html>
