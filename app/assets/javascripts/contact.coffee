@@ -4,6 +4,9 @@
 
 $(document).on 'page:change', ->
 
+  hasClass = (elem, cls) ->
+    return (" " + elem.className + " ").indexOf(" " + cls + " ") > -1;
+
   manageButton = ->
     if name.value != '' and objet.value != '' and mail.value != '' and msg.value != ''
       button.removeAttribute 'disabled'
@@ -12,7 +15,15 @@ $(document).on 'page:change', ->
     return
 
   clickButton = ->
-    sendMail()
+    if name.value != "" && mail.value != "" && objet.value != "" && msg.value != ""
+      if hasClass(mail, "invalid")
+        swal 'Erreur !', 'Veuillez entrer une adresse mail valide !', 'error'
+        sweetButton = document.getElementsByClassName('confirm')[0]
+      else
+        sendMail()
+    else 
+      swal 'Erreur !', 'Veuillez remplir tous les champs !', 'error'
+      sweetButton = document.getElementsByClassName('confirm')[0]
     return
 
   sendMail = ->

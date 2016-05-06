@@ -38,4 +38,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  Mailgun.configure do |config|
+    config.api_key = 'key-f6bf95c55c85b180470211e9d1b9c108'
+  end
+
 end
