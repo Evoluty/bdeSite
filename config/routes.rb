@@ -1,14 +1,25 @@
 Rails.application.routes.draw do
 
+  devise_for :users, :skip => [:registrations]
+
+  # Admin
   get '/admin' => 'dashboard#index'
 
+  # Clubs
   get '/clubs' => 'clubs#index'
 
+  # News
   get '/news' => 'news#index'
+  get '/news/create' => 'news#create'
+  post '/news/add' => 'news#add'
+  get '/news/delete/:id' => 'news#delete'
 
+  # Partenaires
   get '/partenaires' => 'partenaires#index'
 
+  # Contact
   get '/contact' => 'contact#index'
+  post '/contact/send' => 'contact#sendMail'
 
   # get 'home/index'
 
