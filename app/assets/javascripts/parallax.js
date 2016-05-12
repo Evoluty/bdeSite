@@ -12,5 +12,5 @@ $(document).ready(function () {
 				TableBDE.init();
 				TableClub.init();
 			  TablePartner.init();
-			//	TableNews.init();
+			  TableNews.init();
 });

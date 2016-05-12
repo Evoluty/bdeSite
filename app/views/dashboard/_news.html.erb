@@ -1,27 +1,51 @@
-<div class="center">
+<div class="widget-body center">
+	<div class="row center">
+			<div class="col s6">
+				<div class="btn-group"><!-- 1 -->
+						<a class="waves-effect waves-light btn green" href="/news/create">Créer une actualité</a>
+				</div>
+			</div>
+
+			<div class="col s6">
+				<% if @news.size != 0 %>
+					<div class="btn-group pull-right"> <!-- 2 -->
+							<a class='dropdown-button btn' href='#' data-activates='dropdownTools4'>Outils</a>
+							<ul id='dropdownTools4' class='dropdown-content'>
+								<li><a href="#">Print</a></li>
+								<li><a href="#">Save as PDF</a></li>
+								<li><a href="#">Export to Excel</a></li>
+							</ul>
+					</div>
+				<% end %>
+			</div>
+	</div>
 	<% if @news.size == 0 %>
 		<p class="center">Aucune actualité n'a été publiée ! Utilisez le bouton ci-dessous pour en publier !</p>
 	<% else %>
-		<table>
+
+		<table class="table table-striped table-hover table-bordered" id="editable-sample-news">
 	        <thead>
 	          <tr>
 	              <th data-field="title">Titre</th>
 	              <th data-field="text">Texte</th>
 	              <th data-field="img">Date de publication</th>
+								<th data-field="edit">Edition</th>
+							  <th data-field="delete">Suppresion</th>
 	          </tr>
 	        </thead>
 
 	        <tbody>
 				<% for @new in @news %>
-					<tr>
+					<tr id="news_<%= @new.id.to_s %>">
 						<td><%= @new.title %></td>
 						<td><%= @new.text %></td>
 						<td><%= @new.created_at.strftime("%d-%m-%Y %H:%M") %></td>
+						<td><a class="edit" href="javascript:;">Editer</a></td>
 						<td><a href="/news/delete/<%= @new.id.to_s %>">Supprimer</a></td>
 				<% end %>
 			</tbody>
 		</table>
 	<% end %>
 	<br>
-	<a class="waves-effect waves-light btn" href="/news/create">Ajouter une actualité</a>
+
 </div>

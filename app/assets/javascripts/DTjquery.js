@@ -816,7 +816,6 @@
 		{
 			var oCol = oSettings.aoColumns[iCol];
 			var oData = oSettings.aoData[iRow]._aData;
-
 			oCol.fnSetData( oData, val );
 		}
 
