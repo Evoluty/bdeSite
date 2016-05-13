@@ -6,7 +6,7 @@ class NewsController < ApplicationController
   	if !page.nil?
   		@page = page.to_i
   	end
-    nb_news_per_page = 2 
+    nb_news_per_page = 5 
   	@news=News.paginate(:page => @page, :per_page => nb_news_per_page)
   end
 
