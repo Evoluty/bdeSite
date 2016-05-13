@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/news/create' => 'news#create'
   post '/news/add' => 'news#add'
   get '/news/delete/:id' => 'news#delete'
+  get '/news/update/:id' => 'news#update'
 
   # Partenaires
   get '/partenaires' => 'partenaires#index'
