@@ -440,19 +440,21 @@ var TableNews = function () {
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" class=" small" value="' + aData[0] + '">';
-                jqTds[1].innerHTML = '<input type="text" class=" small" value="' + aData[1] + '">';
-                jqTds[3].innerHTML = '<a class="edit" href="/news/update/'+$(jqTds).parent().prop("id")+'">Sauvegarder</a>';
+                jqTds[0].innerHTML = '<input type="text" class="required small" value="' + aData[0] + '" id="title">';
+                jqTds[1].innerHTML = '<textarea class="required materialize-textarea" id="text">' + aData[1] + '</textarea>';
+                jqTds[3].innerHTML = '<a class="edit" href="">Sauvegarder</a>';
                 jqTds[4].innerHTML = '<a class="cancel" href="">Annuler</a>';
+                $("textarea.materialize-textarea").trigger("autoresize");
             }
 
             function saveRow(oTable, nRow) {
                 var jqInputs = $('input', nRow);
+                var textarea = $('textarea', nRow);
                 oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-                oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
+                oTable.fnUpdate(textarea[0].value, nRow, 1, false);
 
                 oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 3, false);
-                oTable.fnUpdate('<a class="/news/delete/'+$(jqInputs).parent().prop("id")+'" href="">Supprimer</a>', nRow, 4, false);
+                oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 4, false);
                 oTable.fnDraw();
             }
 
@@ -507,13 +509,23 @@ var TableNews = function () {
             $('body').on('click', '#editable-sample-news a.delete', function (e) {
                 e.preventDefault();
 
-                if (confirm("Are you sure to delete this row ?") == false) {
+                if (confirm("Voulez-vous vraiment supprimer cette actualité ?") == false) {
                     return;
                 }
 
                 var nRow = $(this).parents('tr')[0];
-                oTable.fnDeleteRow(nRow);
-                alert("Deleted! Do not forget to do some ajax to sync with backend :)");
+                var id_news = nRow.id.substring(5);
+                $.ajax({
+                    method: 'GET',
+                    url: '/news/delete/' + id_news
+                })
+                .done(function() {
+                    oTable.fnDeleteRow(nRow);
+                    swal('Actualité supprimée !', 'L\'actualité a bien été supprimée !', 'success');
+                })
+                .fail(function() {
+                    swal('Erreur !', 'Une erreur est survenue lors de la suppression !', 'error');
+                });
             });
 
             $('body').on('click', '#editable-sample-news a.cancel', function (e) {
@@ -521,7 +533,8 @@ var TableNews = function () {
                 if ($(this).attr("data-mode") == "new") {
                     var nRow = $(this).parents('tr')[0];
                     oTable.fnDeleteRow(nRow);
-                } else {
+                } 
+                else {
                     restoreRow(oTable, nEditing);
                     nEditing = null;
                 }
@@ -537,12 +550,36 @@ var TableNews = function () {
                     restoreRow(oTable, nEditing);
                     editRow(oTable, nRow);
                     nEditing = nRow;
-                } else if (nEditing == nRow && this.innerHTML == "Sauvegarder") {
+                } 
+                else if (nEditing == nRow && this.innerHTML == "Sauvegarder") {
                     /* Editing this row and want to save it */
-                    saveRow(oTable, nEditing);
-                    nEditing = null;
-                    alert("Updated! Do not forget to do some ajax to sync with backend :)");
-                } else {
+                    var id_news = nRow.id.substring(5);
+                    $.ajax({
+                        method: 'GET',
+                        url: '/news/update/' + id_news,
+                        data: { 
+                                title: nRow.querySelector("#title").value,
+                                text: nRow.querySelector("#text").value
+                                }
+                    })
+                    .done(function(result) {
+                        var res = parseInt(result);
+                        if (res)
+                        {
+                            saveRow(oTable, nEditing);
+                            nEditing = null;
+                            swal('Actualité mise à jour !', 'L\'actualité a bien été mise à jour !', 'success');
+                        }
+                        else
+                        {
+                           swal('Erreur !', 'Tous les champs doivent être remplis !', 'error'); 
+                        }
+                    })
+                    .fail(function() {
+                        swal('Erreur !', 'Une erreur est survenue lors de la mise à jour de l\'actualité !', 'error');
+                    });
+                } 
+                else {
                     /* No edit in progress - let's start one */
                     editRow(oTable, nRow);
                     nEditing = nRow;
