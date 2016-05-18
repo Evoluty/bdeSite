@@ -2,7 +2,6 @@ class ClubsController < ApplicationController
   def index
     @title = "Les CLubs"
   	@clubs = Club.all()
-
   end
 
   def create
@@ -18,7 +17,7 @@ class ClubsController < ApplicationController
     name = params[:name]
     description = params[:description]
     president = params[:president]
-    photo = params[:photo]
+    photo = params[:image_club]
     c = Club.find(params[:id])
     c.nom = name
     c.description = description
@@ -33,5 +32,14 @@ class ClubsController < ApplicationController
 
   def add
 
+  end
+
+  def update
+  	id_club = params[:id]
+  	club = Club.find(id_club)
+  	club.nom = params[:nom]
+  	club.description = params[:description]
+  	club.image_club = params[:image_club]
+  	club.save()
   end
 end

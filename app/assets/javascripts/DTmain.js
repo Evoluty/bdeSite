@@ -180,20 +180,29 @@ var TableClub = function () {
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" id="name" class=" small" value="' + aData[0] + '">';
-                jqTds[1].innerHTML = '<input type="text" id="description" class=" small" value="' + aData[1] + '">';
-                jqTds[2].innerHTML = '<input type="text" id="president" class=" small" value="' + aData[2] + '">';
-                jqTds[3].innerHTML = '<input type="text" id="photo" class=" small" value="' + aData[3] + '">';
+                jqTds[0].innerHTML = '<input type="text" class=" small" value="' + aData[0] + '">';
+                jqTds[1].innerHTML = '<textarea class="required materialize-textarea" id="text">' + aData[1] + '</textarea>';
+                jqTds[2].innerHTML = '<input type="text" class=" small" value="' + aData[2] + '">';
+                jqTds[3].innerHTML = "  <div class='file-field input-field'>"+
+                                            "<div class='btn'>"+
+                                                "<span>File</span>"+
+                                                "<input type='file' name='image_club' id='image_club' value='"+ aData[3] + "'>"+ 
+                                            "</div>"+
+                                            "<div class='file-path-wrapper'>"+
+                                                "<input class='file-path validate' type='text'>"+
+                                            "</div>"+
+                                        "</div>";
                 jqTds[4].innerHTML = '<a class="edit" href="">Sauvegarder</a>';
                 jqTds[5].innerHTML = '<a class="cancel" href="">Annuler</a>';
             }
 
             function saveRow(oTable, nRow) {
                 var jqInputs = $('input', nRow);
+                var textarea = $('textarea', nRow);
                 oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-                oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-                oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-                oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
+                oTable.fnUpdate(textarea[0].value, nRow, 1, false);
+                oTable.fnUpdate(jqInputs[1].value, nRow, 2, false);
+                oTable.fnUpdate(jqInputs[2].value, nRow, 3, false);
                 oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 4, false);
                 oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 5, false);
                 oTable.fnDraw();
@@ -205,7 +214,7 @@ var TableClub = function () {
                 oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
                 oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
                 oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-                oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 4, false);
+                oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 3, false);
                 oTable.fnDraw();
             }
 
@@ -537,6 +546,7 @@ var TableNews = function () {
                         "sNext": "Suivant"
                     }
                 },
+                "aaSorting": [[2, 'desc']],
                 "aoColumnDefs": [{
                         'bSortable': false,
                         'aTargets': [3,4]
