@@ -180,9 +180,9 @@ var TableClub = function () {
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" class=" small" value="' + aData[0] + '">';
-                jqTds[1].innerHTML = '<textarea class="required materialize-textarea" id="text">' + aData[1] + '</textarea>';
-                jqTds[2].innerHTML = '<input type="text" class=" small" value="' + aData[2] + '">';
+                jqTds[0].innerHTML = '<input type="text" id="name" class=" small" value="' + aData[0] + '">';
+                jqTds[1].innerHTML = '<textarea class="required materialize-textarea" id="description">' + aData[1] + '</textarea>';
+                jqTds[2].innerHTML = '<input type="text" id="president" class=" small" value="' + aData[2] + '">';
                 jqTds[3].innerHTML = "  <div class='file-field input-field'>"+
                                             "<div class='btn'>"+
                                                 "<span>File</span>"+
@@ -311,7 +311,7 @@ var TableClub = function () {
                                 name: nRow.querySelector("#name").value,
                                 description: nRow.querySelector("#description").value,
                                 president: nRow.querySelector("#president").value,
-                                photo: nRow.querySelector("#photo").value
+                                photo: nRow.querySelector("#image_club").value
                                 }
                     })
                     .done(function(result) {
