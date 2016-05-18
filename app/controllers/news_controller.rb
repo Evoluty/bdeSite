@@ -32,4 +32,19 @@ class NewsController < ApplicationController
   	News.destroy(id)
   	redirect_to "/admin", notice: "L'actualité a bien été supprimée !"
   end
+
+  def update
+    title = params[:title]
+    text = params[:text]
+    id = params[:id]
+    a = News.find(id)
+    a.title = title
+    a.text = text
+    if (a.save())
+      render :text => 1
+    else
+      render :text => 0
+    end
+  end
+
 end

@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   # Clubs
   get '/clubs' => 'clubs#index'
+  get '/clubs/create' => 'clubs#create'
+  get '/clubs/delete/:id' => 'clubs#delete'
+  get '/clubs/update/:id' => 'clubs#update'
+  post '/clubs/add' => 'clubs#add'
 
   # News
   get '/news' => 'news#index'
@@ -24,7 +28,7 @@ Rails.application.routes.draw do
 
   # get 'home/index'
 
-  root 'home#index'  
+  root 'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

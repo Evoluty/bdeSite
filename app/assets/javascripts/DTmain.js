@@ -19,22 +19,26 @@ var TableBDE = function () {
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" class=" small" value="' + aData[0] + '">';
-                jqTds[1].innerHTML = '<input type="text" class=" small" value="' + aData[1] + '">';
-                jqTds[2].innerHTML = '<input type="text" class=" small" value="' + aData[2] + '">';
-                jqTds[3].innerHTML = '<input type="text" class=" small" value="' + aData[3] + '">';
-                jqTds[4].innerHTML = '<a class="edit" href="">Sauvegarder</a>';
-                jqTds[5].innerHTML = '<a class="cancel" href="">Annuler</a>';
+                jqTds[0].innerHTML = '<input type="text" id="name" class=" small" value="' + aData[0] + '">';
+                jqTds[1].innerHTML = '<input type="text" id="description" class=" small" value="' + aData[1] + '">';
+                jqTds[2].innerHTML = '<input type="text" id="description" class=" small" value="' + aData[1] + '">';
+                jqTds[3].innerHTML = '<input type="text" id="president" class=" small" value="' + aData[2] + '">';
+                jqTds[4].innerHTML = '<input type="text" id="photo" class=" small" value="' + aData[3] + '">';
+                jqTds[5].innerHTML = '<input type="text" class=" small" value="' + aData[4] + '">';
+                jqTds[6].innerHTML = '<a class="edit" href="">Sauvegarder</a>';
+                jqTds[7].innerHTML = '<a class="cancel" href="">Annuler</a>';
             }
 
             function saveRow(oTable, nRow) {
                 var jqInputs = $('input', nRow);
                 oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
                 oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-                oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-                oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-                oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 4, false);
-                oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 5, false);
+                oTable.fnUpdate(jqInputs[2].value, nRow, 1, false);
+                oTable.fnUpdate(jqInputs[3].value, nRow, 2, false);
+                oTable.fnUpdate(jqInputs[4].value, nRow, 3, false);
+                oTable.fnUpdate(jqInputs[5].value, nRow, 4, false);
+                oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 6, false);
+                oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 7, false);
                 oTable.fnDraw();
             }
 
@@ -44,7 +48,8 @@ var TableBDE = function () {
                 oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
                 oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
                 oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-                oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 4, false);
+                oTable.fnUpdate(jqInputs[4].value, nRow, 3, false);
+                oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 5, false);
                 oTable.fnDraw();
             }
 
@@ -66,7 +71,7 @@ var TableBDE = function () {
                 },
                 "aoColumnDefs": [{
                         'bSortable': false,
-                        'aTargets': [0]
+                        'aTargets': [5,6]
                     }
                 ]
             });
@@ -94,7 +99,18 @@ var TableBDE = function () {
                 }
 
                 var nRow = $(this).parents('tr')[0];
-                oTable.fnDeleteRow(nRow);
+                var id_member = nRow.id.substring(5);
+                $.ajax({
+                    method: 'GET',
+                    url: '/news/delete/' + id_nember
+                })
+                .done(function() {
+                    oTable.fnDeleteRow(nRow);
+                    swal('Actualité supprimée !', 'L\'actualité a bien été supprimée !', 'success');
+                })
+                .fail(function() {
+                    swal('Erreur !', 'Une erreur est survenue lors de la suppression !', 'error');
+                });
                 alert("Deleted! Do not forget to do some ajax to sync with backend :)");
             });
 
@@ -130,7 +146,7 @@ var TableBDE = function () {
                     /* Editing this row and want to save it */
                     saveRow(oTable, nEditing);
                     nEditing = null;
-                    alert("Updated! Do not forget to do some ajax to sync with backend :)");
+
                 } else {
                     /* No edit in progress - let's start one */
                     editRow(oTable, nRow);
@@ -164,10 +180,10 @@ var TableClub = function () {
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" class=" small" value="' + aData[0] + '">';
-                jqTds[1].innerHTML = '<input type="text" class=" small" value="' + aData[1] + '">';
-                jqTds[2].innerHTML = '<input type="text" class=" small" value="' + aData[2] + '">';
-                jqTds[3].innerHTML = '<input type="text" class=" small" value="' + aData[3] + '">';
+                jqTds[0].innerHTML = '<input type="text" id="name" class=" small" value="' + aData[0] + '">';
+                jqTds[1].innerHTML = '<input type="text" id="description" class=" small" value="' + aData[1] + '">';
+                jqTds[2].innerHTML = '<input type="text" id="president" class=" small" value="' + aData[2] + '">';
+                jqTds[3].innerHTML = '<input type="text" id="photo" class=" small" value="' + aData[3] + '">';
                 jqTds[4].innerHTML = '<a class="edit" href="">Sauvegarder</a>';
                 jqTds[5].innerHTML = '<a class="cancel" href="">Annuler</a>';
             }
@@ -211,7 +227,7 @@ var TableClub = function () {
                 },
                 "aoColumnDefs": [{
                         'bSortable': false,
-                        'aTargets': [0]
+                        'aTargets': [4,5]
                     }
                 ]
             });
@@ -234,12 +250,23 @@ var TableClub = function () {
             $('body').on('click', '#editable-sample-club a.delete', function (e) {
                 e.preventDefault();
 
-                if (confirm("Are you sure to delete this row ?") == false) {
+                if (confirm("Voulez vous vraiment supprimer ce club ?") == false) {
                     return;
                 }
 
                 var nRow = $(this).parents('tr')[0];
-                oTable.fnDeleteRow(nRow);
+                var id_club = nRow.id.substring(5);
+                $.ajax({
+                    method: 'GET',
+                    url: '/clubs/delete/' + id_club
+                })
+                .done(function() {
+                    oTable.fnDeleteRow(nRow);
+                    swal('Actualité supprimée !', 'L\'actualité a bien été supprimée !', 'success');
+                })
+                .fail(function() {
+                    swal('Erreur !', 'Une erreur est survenue lors de la suppression !', 'error');
+                });
                 alert("Deleted! Do not forget to do some ajax to sync with backend :)");
             });
 
@@ -267,9 +294,33 @@ var TableClub = function () {
                     nEditing = nRow;
                 } else if (nEditing == nRow && this.innerHTML == "Sauvegarder") {
                     /* Editing this row and want to save it */
-                    saveRow(oTable, nEditing);
-                    nEditing = null;
-                    alert("Updated! Do not forget to do some ajax to sync with backend :)");
+                    var id_club = nRow.id.substring(5);
+                    $.ajax({
+                        method: 'GET',
+                        url: '/clubs/update/' + id_club,
+                        data: {
+                                name: nRow.querySelector("#name").value,
+                                description: nRow.querySelector("#description").value,
+                                president: nRow.querySelector("#president").value,
+                                photo: nRow.querySelector("#photo").value
+                                }
+                    })
+                    .done(function(result) {
+                        var res = parseInt(result);
+                        if (res)
+                        {
+                            saveRow(oTable, nEditing);
+                            nEditing = null;
+                            swal('Actualité mise à jour !', 'Le club a bien été mise à jour !', 'success');
+                        }
+                        else
+                        {
+                           swal('Erreur !', 'Tous les champs doivent être remplis !', 'error');
+                        }
+                    })
+                    .fail(function() {
+                        swal('Erreur !', 'Une erreur est survenue lors de la mise à jour de l\'actualité !', 'error');
+                    });
                 } else {
                     /* No edit in progress - let's start one */
                     editRow(oTable, nRow);
@@ -306,8 +357,9 @@ var TablePartner = function () {
                 jqTds[1].innerHTML = '<input type="text" class=" small" value="' + aData[1] + '">';
                 jqTds[2].innerHTML = '<input type="text" class=" small" value="' + aData[2] + '">';
                 jqTds[3].innerHTML = '<input type="text" class=" small" value="' + aData[3] + '">';
-                jqTds[4].innerHTML = '<a class="edit" href="">Sauvegarder</a>';
-                jqTds[5].innerHTML = '<a class="cancel" href="">Annuler</a>';
+                jqTds[4].innerHTML = '<input type="text" class=" small" value="' + aData[4] + '">';
+                jqTds[5].innerHTML = '<a class="edit" href="">Sauvegarder</a>';
+                jqTds[6].innerHTML = '<a class="cancel" href="">Annuler</a>';
             }
 
             function saveRow(oTable, nRow) {
@@ -316,8 +368,9 @@ var TablePartner = function () {
                 oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
                 oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
                 oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-                oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 4, false);
-                oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 5, false);
+                oTable.fnUpdate(jqInputs[4].value, nRow, 4, false);
+                oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 5, false);
+                oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 6, false);
                 oTable.fnDraw();
             }
 
@@ -533,7 +586,7 @@ var TableNews = function () {
                 if ($(this).attr("data-mode") == "new") {
                     var nRow = $(this).parents('tr')[0];
                     oTable.fnDeleteRow(nRow);
-                } 
+                }
                 else {
                     restoreRow(oTable, nEditing);
                     nEditing = null;
@@ -550,14 +603,14 @@ var TableNews = function () {
                     restoreRow(oTable, nEditing);
                     editRow(oTable, nRow);
                     nEditing = nRow;
-                } 
+                }
                 else if (nEditing == nRow && this.innerHTML == "Sauvegarder") {
                     /* Editing this row and want to save it */
                     var id_news = nRow.id.substring(5);
                     $.ajax({
                         method: 'GET',
                         url: '/news/update/' + id_news,
-                        data: { 
+                        data: {
                                 title: nRow.querySelector("#title").value,
                                 text: nRow.querySelector("#text").value
                                 }
@@ -572,13 +625,13 @@ var TableNews = function () {
                         }
                         else
                         {
-                           swal('Erreur !', 'Tous les champs doivent être remplis !', 'error'); 
+                           swal('Erreur !', 'Tous les champs doivent être remplis !', 'error');
                         }
                     })
                     .fail(function() {
                         swal('Erreur !', 'Une erreur est survenue lors de la mise à jour de l\'actualité !', 'error');
                     });
-                } 
+                }
                 else {
                     /* No edit in progress - let's start one */
                     editRow(oTable, nRow);

@@ -3,8 +3,8 @@ class CreateClubs < ActiveRecord::Migration
     create_table :clubs do |t|
       t.string :nom
       t.text :description
+      t.string :president
       t.string :image
-
       t.timestamps null: false
     end
   end
