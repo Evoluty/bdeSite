@@ -189,7 +189,7 @@ var TableClub = function () {
                                                 "<input type='file' name='image_club' id='image_club' value='"+ aData[3] + "'>"+
                                             "</div>"+
                                             "<div class='file-path-wrapper'>"+
-                                                "<input class='file-path validate' type='text'>"+
+                                                "<input class='file-path validate' id='photo' type='text'>"+
                                             "</div>"+
                                         "</div>";
                 jqTds[4].innerHTML = '<a class="edit" href="">Sauvegarder</a>';

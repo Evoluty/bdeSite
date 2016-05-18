@@ -4,7 +4,6 @@ class PartenairesController < ApplicationController
     @partenaires = Partenaire.all()
   end
 
-
   def delete
     id = params[:id]
     Partenaire.destroy(id)
