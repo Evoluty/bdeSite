@@ -7,3 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Club.create(nom: 'test', description: 'hello ce club est trop bien !', president: 'Président')
+Partenaire.create(nom: 'test', typePartenaire: 'argent', description: 'hello ce club est trop bien !', adresse: '11 rdv')

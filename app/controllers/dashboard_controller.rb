@@ -5,5 +5,6 @@ class DashboardController < ApplicationController
   	@title = "Administration - Tableau de bord"
   	@news = News.all()
   	@clubs = Club.all()
+    @partenaires = Partenaire.all()
   end
 end

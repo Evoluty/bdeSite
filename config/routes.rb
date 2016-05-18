@@ -21,6 +21,10 @@ Rails.application.routes.draw do
 
   # Partenaires
   get '/partenaires' => 'partenaires#index'
+  get '/partenaires/create' => 'partenaires#create'
+  post '/partenaires/add' => 'partenaires#add'
+  get '/partenaires/delete/:id' => 'partenaires#delete'
+  get '/partenaires/update/:id' => 'partenaires#update'
 
   # Contact
   get '/contact' => 'contact#index'
