@@ -6,4 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Club.create(nom: 'test', description: 'hello ce club est trop bien !', image: 'superImage')
+Club.create(nom: 'test', description: 'hello ce club est trop bien !', president: 'Président')

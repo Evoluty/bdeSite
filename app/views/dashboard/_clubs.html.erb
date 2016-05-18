@@ -21,7 +21,7 @@
         </div>
     </div>
     <% if @clubs.size == 0 %>
-      <p class="center">Aucun membre de BDE stocké, veuillez en insérer un.</p>
+      <p class="center">Aucun club ajouté, veuillez en insérer un.</p>
     <% else %>
       <table class="table table-striped table-hover table-bordered" id="editable-sample-club">
           <thead>
@@ -37,10 +37,10 @@
           <tbody>
           <% for @club in @clubs %>
   				<tr id="club_<%= @club.id.to_s %>">
-  					<td><%= @club.nom%></td>
+  					<td><%= @club.nom %></td>
   					<td><%= @club.description %></td>
   					<td><%= @club.president %></td>
-                      <td style="width:30%;"><%= @club.image_club %></td>
+            <td style="width:30%;"><%= @club.image_club_file_name %></td>
   					<td><a class="edit" href="javascript:;">Editer</a></td>
   					<td><a class="delete" id="editable-sample-club" href="">Supprimer</a></td>
   				</tr>
