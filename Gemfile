@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 #ruby "2.2.4"
+#ruby "2.3.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
@@ -44,7 +45,10 @@ gem 'mailgun-ruby', '~> 1.1.0', require: 'mailgun'
 
 gem 'rails_12factor', group: :production
 
-#gem 'devise'
+# Captcha
+gem 'recaptcha', require: 'recaptcha/rails'
+# Paperclip
+gem "paperclip"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -8,17 +8,16 @@ default: &default
   #adapter: sqlite3
   #pool: 5
   #timeout: 5000
-  host: localhost
   adapter: postgresql
   encoding: utf8
-  database: site_db
   pool: 5
-  username: site
-  password: test
 
 development:
   <<: *default
-  database: site_development
+  host: localhost
+  database: site_db
+  username: site
+  password: test
   #database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
@@ -26,10 +25,13 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: site_test
   #database: db/test.sqlite3
 
 production:
   <<: *default
-  database: site_production
+  host: 10.0.0.2
+  port: 5433
+  database: sitebde
+  username: sitebde
+  password: tJZmuzgV_nEEf5qOCdzIJg
   #database: db/production.sqlite3

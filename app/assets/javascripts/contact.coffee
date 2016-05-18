@@ -44,11 +44,10 @@ $(document).on 'page:change', ->
           )
         .fail ->
           swal 'Erreur !', 'Le message n\'a pas pu être envoyé !', 'error'
-          sweetButton = document.getElementsByClassName('confirm')[0]
-          sweetButton.addEventListener 'click', sweetValidate
         return
 
   sweetValidate = ->
+    window.location = "/"
     return
 
   if window.location.pathname == '/contact'
