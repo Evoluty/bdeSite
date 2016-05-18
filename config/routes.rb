@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  devise_for :users, :skip => [:registrations]
+  # Members bde
+  get '/login' => 'members#sign_in'
+  post '/members/login'
+  post '/members/create'
 
   # Admin
   get '/admin' => 'dashboard#index'
@@ -22,7 +25,6 @@ Rails.application.routes.draw do
   post '/contact/send' => 'contact#sendMail'
 
   # get 'home/index'
-
   root 'home#index'  
 
   # The priority is based upon order of creation: first created -> highest priority.

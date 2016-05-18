@@ -1,0 +1,23 @@
+<div class="container">
+	<div class="section">
+		<div class="row center">
+			<h3> Se connecter </h3>
+			<%= form_tag "/members/login", method: "post", class: "col l6 offset-l3 m8 offset-m2 s12" do %>
+
+				<div class="input-field">
+					<%= text_field_tag 'email', nil, class: 'validate required' %>
+					<%= label_tag "email", "Email" %>
+				</div>
+
+				<div class="input-field">
+					<%= text_field_tag 'password', nil, class: 'validate required password', type: 'password' %>
+					<%= label_tag "password", "Mot de passe" %>
+				</div>
+				<br>
+				<button class="btn waves-effect waves-light amber darken-4" type="submit" name="action">Connexion
+					<i class="material-icons right">input</i>
+				</button>
+			<% end %>
+		</div>
+	</div>
+</div>

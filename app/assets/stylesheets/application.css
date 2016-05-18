@@ -112,7 +112,7 @@ div .parallax > img
 
 .parallax-container 
 {
-  min-height: 380px;
+  min-height: 350px;
   line-height: 0;
   height: auto;
   color: rgba(255,255,255,.9);
@@ -121,6 +121,12 @@ div .parallax > img
 .parallax-container .section 
 {
   width: 100%;
+}
+
+.parallax img
+{
+  /*background-position: 100% 100px !important;*/
+  /*height: 40px;*/
 }
 
 @media only screen and (max-width : 992px) 
