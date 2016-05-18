@@ -39,7 +39,9 @@ gem 'pg'
 gem 'will_paginate', '~> 3.1.0'
 # Mailgun
 gem 'mailgun-ruby', '~> 1.1.0', require: 'mailgun'
-
+# Captcha
+gem 'recaptcha', require: 'recaptcha/rails'
+# Devise
 gem 'devise'
 
 group :development, :test do
