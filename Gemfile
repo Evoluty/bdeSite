@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
-
-#ruby "2.2.4"
-
+ruby "2.3.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
@@ -35,13 +33,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 # ADDED GEMS
-# PostgreSQL
+# PostgreSQL 
 gem 'pg'
 # Will_paginate for pagination
 gem 'will_paginate', '~> 3.1.0'
 # Mailgun
 gem 'mailgun-ruby', '~> 1.1.0', require: 'mailgun'
-
+# Captcha
+gem 'recaptcha', require: 'recaptcha/rails'
+# Devise
 gem 'devise'
 
 group :development, :test do
@@ -56,3 +56,4 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+

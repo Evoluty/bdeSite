@@ -189,6 +189,11 @@ div .parallax > img
   background-color: #dff0d8;
 }
 
+table.dataTable th
+{
+  cursor: pointer;
+}
+
 footer.page-footer 
 {
   margin: 0;
