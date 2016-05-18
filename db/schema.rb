@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160518133936) do
   create_table "clubs", force: :cascade do |t|
     t.string   "nom"
     t.text     "description"
+    t.string   "president"
     t.string   "image"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false

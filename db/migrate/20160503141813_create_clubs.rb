@@ -3,7 +3,7 @@ class CreateClubs < ActiveRecord::Migration
     create_table :clubs do |t|
       t.string :nom
       t.text :description
-      t.string :image
+      t.string :president
       t.attachment :image_club
       
       t.timestamps null: false
