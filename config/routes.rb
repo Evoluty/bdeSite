@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get '/login' => 'members#sign_in'
   post '/members/login'
   post '/members/create'
+  post '/members/update' => 'members#update'
+  get 'members/delete/:id' => 'members#delete'
 
   # Admin
   get '/admin' => 'dashboard#index'

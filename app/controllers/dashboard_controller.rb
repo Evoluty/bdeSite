@@ -13,9 +13,10 @@ class DashboardController < ApplicationController
   def index
   	@title = "Administration - Tableau de bord"
   	@news = News.all()
-    	@member = Member.new
-    	@clubs = Club.all()
-    	@partenaires = Partenaire.all()
+  	@member = Member.new
+  	@clubs = Club.all()
+  	@partenaires = Partenaire.all()
+    @members = Member.all()
   end
 
 end

@@ -7,6 +7,8 @@ class CreateMembers < ActiveRecord::Migration
       t.string :password_digest 
       t.string :job
       t.string :role
+      t.attachment :photo
+
       t.timestamps null: false
     end
   end

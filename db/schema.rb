@@ -35,8 +35,12 @@ ActiveRecord::Schema.define(version: 20160518184714) do
     t.string   "password_digest"
     t.string   "job"
     t.string   "role"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "news", force: :cascade do |t|
