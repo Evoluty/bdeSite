@@ -28,6 +28,38 @@ class MembersController < ApplicationController
 	end
 
 	def member_params
-      params.require(:member).permit(:firstname, :email, :password, :password_confirmation)
+      	params.require(:member).permit(:firstname, :email, :password, :password_confirmation)
+    end
+
+    def update
+    	id = params[:id]
+	    name = params[:name]
+	    firstname = params[:firstname]
+	    email = params[:email]
+	    role = params[:role]
+	   	job = params[:job]
+	    photo = params[:photo]
+
+	    m = Member.find(id)
+	    m.name = name
+	    m.firstname = firstname
+	    m.email = email
+	    m.role = role
+	    m.job = job
+	    if (!photo.nil?)
+	      m.photo = photo
+	    end
+
+	    if (m.save())
+	      render :json => {"image": m.photo.url(:thumb), "id": m.id}
+	    else
+	      render :json => {"errors": m.errors.full_messages}
+	    end
+    end
+
+    def delete
+    	id = params[:id]
+    	Member.destroy(id)
+    	render :nothing => true
     end
 end

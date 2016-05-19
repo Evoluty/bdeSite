@@ -5,7 +5,7 @@
 			<%= form_tag "/members/login", method: "post", class: "col l6 offset-l3 m8 offset-m2 s12" do %>
 
 				<div class="input-field">
-					<%= text_field_tag 'email', nil, class: 'validate required' %>
+					<%= email_field_tag 'email', nil, class: 'validate required' %>
 					<%= label_tag "email", "Email" %>
 				</div>
 
