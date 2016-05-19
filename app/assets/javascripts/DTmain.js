@@ -180,29 +180,39 @@ var TableClub = function () {
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" id="name" class=" small" value="' + aData[0] + '">';
-                jqTds[1].innerHTML = '<textarea class="required materialize-textarea" id="description">' + aData[1] + '</textarea>';
-                jqTds[2].innerHTML = '<input type="text" id="president" class=" small" value="' + aData[2] + '">';
+                var id_row = nRow.id.substr(5);
+                var span_value = aData[3].split("<span>");
+                if (span_value[1])
+                {
+                    var image = span_value[1].split("</span>")[0];
+                }
+                else
+                {
+                    var image = ""
+                }
+                jqTds[0].innerHTML = '<input type="text" id="name" name="name_' + id_row + '" class=" small" value="' + aData[0] + '">';
+                jqTds[1].innerHTML = '<textarea class="required materialize-textarea" id="description" name="description_' + id_row + '">' + aData[1] + '</textarea>';
+                jqTds[2].innerHTML = '<input type="text" id="president" name="president_' + id_row + '" class=" small" value="' + aData[2] + '">';
                 jqTds[3].innerHTML = "  <div class='file-field input-field'>"+
                                             "<div class='btn'>"+
                                                 "<span>File</span>"+
-                                                "<input type='file' name='image_club' id='image_club' value='"+ aData[3] + "'>"+ 
+                                                "<input type='file' name='image_club_" + id_row + "' id='image_club'>"+  
                                             "</div>"+
                                             "<div class='file-path-wrapper'>"+
-                                                "<input class='file-path validate' type='text'>"+
+                                                "<input class='file-path validate' type='text' value='" + image + "'>"+
                                             "</div>"+
                                         "</div>";
                 jqTds[4].innerHTML = '<a class="edit" href="">Sauvegarder</a>';
                 jqTds[5].innerHTML = '<a class="cancel" href="">Annuler</a>';
             }
 
-            function saveRow(oTable, nRow) {
+            function saveRow(oTable, nRow, url) {
                 var jqInputs = $('input', nRow);
                 var textarea = $('textarea', nRow);
                 oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
                 oTable.fnUpdate(textarea[0].value, nRow, 1, false);
                 oTable.fnUpdate(jqInputs[1].value, nRow, 2, false);
-                oTable.fnUpdate(jqInputs[2].value, nRow, 3, false);
+                oTable.fnUpdate('<img src="' + url + '" style="vertical-align:middle;margin-right:5px;"><span>' + jqInputs[3].value + '</span>', nRow, 3, false);
                 oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 4, false);
                 oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 5, false);
                 oTable.fnDraw();
@@ -271,12 +281,11 @@ var TableClub = function () {
                 })
                 .done(function() {
                     oTable.fnDeleteRow(nRow);
-                    swal('Actualité supprimée !', 'L\'actualité a bien été supprimée !', 'success');
+                    swal('Club supprimé !', 'Le club a bien été supprimé !', 'success');
                 })
                 .fail(function() {
                     swal('Erreur !', 'Une erreur est survenue lors de la suppression !', 'error');
                 });
-                alert("Deleted! Do not forget to do some ajax to sync with backend :)");
             });
 
             $('body').on('click', '#editable-sample-club a.cancel', function (e) {
@@ -304,32 +313,30 @@ var TableClub = function () {
                 } else if (nEditing == nRow && this.innerHTML == "Sauvegarder") {
                     /* Editing this row and want to save it */
                     var id_club = nRow.id.substring(5);
-                    $.ajax({
-                        method: 'GET',
-                        url: '/clubs/update/' + id_club,
-                        data: {
-                                name: nRow.querySelector("#name").value,
-                                description: nRow.querySelector("#description").value,
-                                president: nRow.querySelector("#president").value,
-                                photo: nRow.querySelector("#image_club").value
-                                }
-                    })
-                    .done(function(result) {
+                    var form = document.getElementById('form_club');
+                    var input_id = document.createElement('input');
+                    input_id.type = "hidden";
+                    input_id.name = "id";
+                    input_id.value = id_club;
+                    form.appendChild(input_id);
+                    form.submit();
+                    form.removeChild(input_id);
+
+                    setTimeout(function() {
+                        var frame = document.getElementById('myFrame');
+                        var result = frame.contentDocument.body.textContent;
                         var res = parseInt(result);
-                        if (res)
+                        if (isNaN(res))
                         {
-                            saveRow(oTable, nEditing);
+                            saveRow(oTable, nEditing, result);
                             nEditing = null;
-                            swal('Actualité mise à jour !', 'Le club a bien été mise à jour !', 'success');
+                            swal('Club mis à jour !', 'Le club a bien été mis à jour !', 'success');
                         }
                         else
                         {
-                           swal('Erreur !', 'Tous les champs doivent être remplis !', 'error');
+                            swal('Erreur !', 'Tous les champs doivent être remplis !', 'error');
                         }
-                    })
-                    .fail(function() {
-                        swal('Erreur !', 'Une erreur est survenue lors de la mise à jour de l\'actualité !', 'error');
-                    });
+                    }, 1000);
                 } else {
                     /* No edit in progress - let's start one */
                     editRow(oTable, nRow);

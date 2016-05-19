@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/clubs' => 'clubs#index'
   get '/clubs/create' => 'clubs#create'
   get '/clubs/delete/:id' => 'clubs#delete'
-  get '/clubs/update/:id' => 'clubs#update'
+  post '/clubs/update' => 'clubs#update'
   post '/clubs/add' => 'clubs#add'
 
   # News
