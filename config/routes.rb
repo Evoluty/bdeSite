@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   get '/clubs/create' => 'clubs#create'
   get '/clubs/delete/:id' => 'clubs#delete'
   post '/clubs/update' => 'clubs#update'
-  post '/clubs/add' => 'clubs#add'
 
   # News
   get '/news' => 'news#index'
@@ -27,7 +26,7 @@ Rails.application.routes.draw do
   get '/partenaires/create' => 'partenaires#create'
   post '/partenaires/add' => 'partenaires#add'
   get '/partenaires/delete/:id' => 'partenaires#delete'
-  get '/partenaires/update/:id' => 'partenaires#update'
+  post '/partenaires/update' => 'partenaires#update'
 
   # Contact
   get '/contact' => 'contact#index'

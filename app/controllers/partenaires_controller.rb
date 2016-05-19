@@ -1,7 +1,9 @@
 class PartenairesController < ApplicationController
   def index
     @title = "Les Partenaires"
-    @partenaires = Partenaire.all()
+    @parrains = Partenaire.where(typePartenaire: 'Parrain');
+    @partenaires = Partenaire.where(typePartenaire: 'Partenaire');
+    @avantages = Partenaire.where(typePartenaire: 'Avantage');
   end
 
   def delete
@@ -11,21 +13,30 @@ class PartenairesController < ApplicationController
   end
 
   def update
+    id = params[:id]
     name = params[:nom]
     description = params[:description]
     typePartenaire = params[:typePartenaire]
     adresse = params[:adresse]
+    logo = params[:logo]
 
-    c = Partenaire.find(params[:id])
-    c.nom = name
-    c.description = description
-    c.typePartenaire = typePartenaire
-    c.adresse=adresse
-
-    if (c.save())
-      render :text => 1
+    if (Partenaire.exists?(id))
+        p = Partenaire.find(id)
     else
-      render :text => 0
+        p = Partenaire.new
+    end
+    p.nom = name
+    p.description = description
+    p.typePartenaire = typePartenaire
+    p.adresse = adresse
+    if (!logo.nil?)
+      p.logo = logo
+    end
+
+    if (p.save())
+      render :json => {"image": p.logo.url(:thumb), "id": p.id}
+    else
+      render :json => {"errors": p.errors.full_messages}
     end
   end
 
