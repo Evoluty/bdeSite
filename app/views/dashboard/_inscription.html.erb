@@ -1,10 +1,36 @@
 <div class="Sign_Form">
-	<h1>Sign Up</h1>
 	<%= form_for(:member, :url => {:controller => 'members', :action => 'create'}) do |f| %>
-		<p> Username:</br> <%= f.text_field :firstname%> </p>
-		<p> Email:</br> <%= f.text_field :email%> </p>
-		<p> Password:</br> <%= f.password_field :password%></p>
-		<p> Password Confirmation:</br> <%= f.password_field :password_confirmation%> </p>
-		<%= f.submit :Signup %>
-	<% end %>
+	<div class="row">
+		<h2 class="center">Nouveau membre</h2>
+		<div class="col s6 offset-s3">
+			<div class="row">
+				<div class="input-field col s6">
+					<%= f.text_field :name, class: "validate" %>
+					<label>Nom</label>
+				</div>
+				<div class="input-field col s6">
+					<%= f.text_field :firstname%>				
+					<label>Prénom</label>
+				</div>
+			</div>
+			<div class="input-field">
+					<%= f.text_field :email %>
+					<label>Email</label>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<%= f.password_field :password, class: "validate" %>
+					<label>Mot de passe</label>
+				</div>
+				<div class="input-field col s6">
+					<%= f.password_field :password_confirmation, class: "validate" %>			
+					<label>Confirmation mot de passe</label>
+				</div>
+			</div>
+			<button class="btn waves-effect waves-light orange" type="submit" name="action">Envoyer
+				<i class="material-icons right">send</i>
+			</button>
+		<% end %>
+	</div>
+	</div>
 </div>

@@ -204,6 +204,7 @@ var TableClub = function () {
                                         "</div>";
                 jqTds[4].innerHTML = '<a class="edit" href="">Sauvegarder</a>';
                 jqTds[5].innerHTML = '<a class="cancel" href="">Annuler</a>';
+                $("textarea.materialize-textarea").trigger("autoresize");
             }
 
             function saveRow(oTable, nRow, res) {
@@ -337,7 +338,7 @@ var TableClub = function () {
                         {
                             swal('Erreur !', res['errors'][0], 'error');
                         }
-                    }, 1000);
+                    }, 2000);
                 } else {
                     /* No edit in progress - let's start one */
                     editRow(oTable, nRow);
