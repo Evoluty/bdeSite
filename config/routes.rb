@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  devise_for :users, :skip => [:registrations]
+  # Members bde
+  get '/login' => 'members#sign_in'
+  post '/members/login'
+  post '/members/create'
 
   # Admin
   get '/admin' => 'dashboard#index'
@@ -21,14 +24,17 @@ Rails.application.routes.draw do
 
   # Partenaires
   get '/partenaires' => 'partenaires#index'
+  get '/partenaires/create' => 'partenaires#create'
+  post '/partenaires/add' => 'partenaires#add'
+  get '/partenaires/delete/:id' => 'partenaires#delete'
+  get '/partenaires/update/:id' => 'partenaires#update'
 
   # Contact
   get '/contact' => 'contact#index'
   post '/contact/send' => 'contact#sendMail'
 
   # get 'home/index'
-
-  root 'home#index'
+  root 'home#index'  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -3,7 +3,7 @@
       <div class="row center">
           <div class="col s6">
             <div class="btn-group"><!-- 1 -->
-                <button id="editable-sample-club_new" class="btn green">
+                <button id="editable-sample-partner_new" class="btn green">
                     Add New <i class="icon-plus"></i>
                 </button>
             </div>
@@ -20,37 +20,36 @@
           </div>
       </div>
 
+
         <table class="table table-striped table-hover table-bordered" id="editable-sample-partner">
             <thead>
             <tr>
-                <th>Nom</th>
-                <th>Type</th>
-                <th>Adresse</th>
-                <th>Description</th>
-                <th>Photo</th>
-                <th>Editer</th>
-                <th>Supprimer</th>
+                <th data-field="name">Nom du partenaire</th>
+                <th data-field="typePartenaire">Type</th>
+                <th data-field="adresse">Adresse</th>
+                <th data-field="description">Déscription</th>
+                <th data-field="logo">Logo</th>
+                <th data-field="edit">Editer</th>
+                <th data-field="delete">Supprimer</th>
             </tr>
             </thead>
             <tbody>
-            <tr class="">
-                <td>Jondi Rose</td>
-                <td>Alfred Jondi Rose</td>
-                <td>1234</td>
-                <td class="center">super user</td>
-                <td class="center">logo</td>
+            <% if @partenaires.size == 0 %>
+              <p class="center">Aucun partenaire ajouté, veuillez en insérer un.</p>
+            <% else %>
+              <% for @partenaire in @partenaires %>
+              <tr id="p_<%= @partenaire.id.to_s %>">
+                <td><%= @partenaire.nom %></td>
+                <td><%= @partenaire.typePartenaire %></td>
+                <td><%= @partenaire.adresse %></td>
+                <td><%= @partenaire.description %></td>
+                <td style="width:30%;">Vide</td>
                 <td><a class="edit" href="javascript:;">Editer</a></td>
-                <td><a class="delete" href="javascript:;">Supprimer</a></td>
-            </tr>
-            <tr class="">
-                <td>Miclo Brice</td>
-                <td>Riquewihr</td>
-                <td>421</td>
-                <td class="center">user</td>
-                <td class="center">logo</td>
-                <td><a class="edit" href="javascript:;">Editer</a></td>
-                <td><a class="delete" href="javascript:;">Supprimer</a></td>
-            </tr>
-            </tbody>
-        </table>
+                <td><a class="delete" id="editable-sample-partner" href="">Supprimer</a></td>
+              </tr>
+              <% end %>
+            <% end %>
+        </tbody>
+      </table>
+
 </div>

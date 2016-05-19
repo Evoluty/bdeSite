@@ -369,11 +369,11 @@ var TablePartner = function () {
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" class=" small" value="' + aData[0] + '">';
-                jqTds[1].innerHTML = '<input type="text" class=" small" value="' + aData[1] + '">';
-                jqTds[2].innerHTML = '<input type="text" class=" small" value="' + aData[2] + '">';
-                jqTds[3].innerHTML = '<input type="text" class=" small" value="' + aData[3] + '">';
-                jqTds[4].innerHTML = '<input type="text" class=" small" value="' + aData[4] + '">';
+                jqTds[0].innerHTML = '<input type="text" id="nom" class=" small" value="' + aData[0] + '">';
+                jqTds[1].innerHTML = '<input type="text" id="typePartenaire" class=" small" value="' + aData[1] + '">';
+                jqTds[2].innerHTML = '<input type="text" id="adresse" class=" small" value="' + aData[2] + '">';
+                jqTds[3].innerHTML = '<input type="text" id="description" class=" small" value="' + aData[3] + '">';
+                jqTds[4].innerHTML = '<input type="text" id="photo" class=" small" value="' + aData[4] + '">';
                 jqTds[5].innerHTML = '<a class="edit" href="">Sauvegarder</a>';
                 jqTds[6].innerHTML = '<a class="cancel" href="">Annuler</a>';
             }
@@ -430,7 +430,7 @@ var TablePartner = function () {
 
             $('#editable-sample-partner_new').click(function (e) {
                 e.preventDefault();
-                var aiNew = oTable.fnAddData(['', '', '', '',
+                var aiNew = oTable.fnAddData(['', '', '', '', '',
                         '<a class="edit" href="">Editer</a>', '<a class="cancel" data-mode="new" href="">Cancel</a>'
                 ]);
                 var nRow = oTable.fnGetNodes(aiNew[0]);
@@ -440,14 +440,23 @@ var TablePartner = function () {
 
             $('body').on('click', '#editable-sample-partner a.delete', function (e) {
                 e.preventDefault();
-
-                if (confirm("Are you sure to delete this row ?") == false) {
+                if (confirm("Voulez vous vraiment supprimer ce partenaire ?") == false) {
                     return;
                 }
 
                 var nRow = $(this).parents('tr')[0];
-                oTable.fnDeleteRow(nRow);
-                alert("Deleted! Do not forget to do some ajax to sync with backend :)");
+                var id_partenaire = nRow.id.substring(2);
+                $.ajax({
+                    method: 'GET',
+                    url: '/partenaires/delete/' + id_partenaire
+                })
+                .done(function() {
+                    oTable.fnDeleteRow(nRow);
+                    swal('Partenaire supprimé !', 'Le partenaire a bien été supprimé !', 'success');
+                })
+                .fail(function() {
+                    swal('Erreur !', 'Une erreur est survenue lors de la suppression !', 'error');
+                });
             });
 
             $('body').on('click', '#editable-sample-partner a.cancel', function (e) {
@@ -474,9 +483,66 @@ var TablePartner = function () {
                     nEditing = nRow;
                 } else if (nEditing == nRow && this.innerHTML == "Sauvegarder") {
                     /* Editing this row and want to save it */
-                    saveRow(oTable, nEditing);
-                    nEditing = null;
-                    alert("Updated! Do not forget to do some ajax to sync with backend :)");
+                    var idP = nRow.id.substring(2);
+                    if(idP.length==0)
+                    {
+                      $.ajax({
+                          method: 'GET',
+                          url: '/partenaires/create/',
+                          data: {
+                                  nom: nRow.querySelector("#nom").value,
+                                  description: nRow.querySelector("#description").value,
+                                  typePartenaire: nRow.querySelector("#typePartenaire").value,
+                                  adresse: nRow.querySelector("#adresse").value
+                                  }
+                      })
+                      .done(function(result) {
+                          var res = parseInt(result);
+                          if (res)
+                          {
+                              saveRow(oTable, nEditing);
+                              nEditing = null;
+                              swal('Partenaire créé !', 'Le partenaire a bien été créé !', 'success');
+                          }
+                          else
+                          {
+                             swal('Erreur !', 'Tous les champs doivent être remplis !', 'error');
+                          }
+                      })
+                      .fail(function() {
+                          swal('Erreur !', 'Une erreur est survenue lors de la création du partenaire !', 'error');
+                      });
+                    }
+                    else {
+                      $.ajax({
+                          method: 'GET',
+                          url: '/partenaires/update/' + idP,
+                          data: {
+                                  nom: nRow.querySelector("#nom").value,
+                                  description: nRow.querySelector("#description").value,
+                                  typePartenaire: nRow.querySelector("#typePartenaire").value,
+                                  adresse: nRow.querySelector("#adresse").value
+                                  }
+                      })
+                      .done(function(result) {
+                          var res = parseInt(result);
+                          if (res)
+                          {
+                              saveRow(oTable, nEditing);
+                              nEditing = null;
+                              swal('Partenaire mise à jour !', 'Le partenaire a bien été mit à jour !', 'success');
+                          }
+                          else
+                          {
+                             swal('Erreur !', 'Tous les champs doivent être remplis !', 'error');
+                          }
+                      })
+                      .fail(function() {
+                          swal('Erreur !', 'Une erreur est survenue lors de la mise à jour de l\'actualité !', 'error');
+                      });
+                    }
+
+
                 } else {
                     /* No edit in progress - let's start one */
                     editRow(oTable, nRow);
@@ -624,6 +690,7 @@ var TableNews = function () {
                 else if (nEditing == nRow && this.innerHTML == "Sauvegarder") {
                     /* Editing this row and want to save it */
                     var id_news = nRow.id.substring(5);
+
                     $.ajax({
                         method: 'GET',
                         url: '/news/update/' + id_news,
