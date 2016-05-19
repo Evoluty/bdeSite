@@ -18,3 +18,5 @@
 
 # Ignore Gemfile.lock
 
+/public/system/*
+
