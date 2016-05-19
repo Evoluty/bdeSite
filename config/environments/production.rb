@@ -76,4 +76,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  Mailgun.configure do |config|
+    config.api_key = 'key-f6bf95c55c85b180470211e9d1b9c108'
+  end
 end

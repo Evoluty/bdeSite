@@ -206,13 +206,14 @@ var TableClub = function () {
                 jqTds[5].innerHTML = '<a class="cancel" href="">Annuler</a>';
             }
 
-            function saveRow(oTable, nRow, url) {
+            function saveRow(oTable, nRow, res) {
                 var jqInputs = $('input', nRow);
                 var textarea = $('textarea', nRow);
+                nRow.id = 'club_' + res['id'];
                 oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
                 oTable.fnUpdate(textarea[0].value, nRow, 1, false);
                 oTable.fnUpdate(jqInputs[1].value, nRow, 2, false);
-                oTable.fnUpdate('<img src="' + url + '" style="vertical-align:middle;margin-right:5px;"><span>' + jqInputs[3].value + '</span>', nRow, 3, false);
+                oTable.fnUpdate('<img src="' + res['image'] + '" style="vertical-align:middle;margin-right:5px;"><span>' + jqInputs[3].value + '</span>', nRow, 3, false);
                 oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 4, false);
                 oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 5, false);
                 oTable.fnDraw();
@@ -325,16 +326,16 @@ var TableClub = function () {
                     setTimeout(function() {
                         var frame = document.getElementById('myFrame');
                         var result = frame.contentDocument.body.textContent;
-                        var res = parseInt(result);
-                        if (isNaN(res))
+                        var res = JSON.parse(result);
+                        if (!res['errors'])
                         {
-                            saveRow(oTable, nEditing, result);
+                            saveRow(oTable, nEditing, res);
                             nEditing = null;
                             swal('Club mis à jour !', 'Le club a bien été mis à jour !', 'success');
                         }
                         else
                         {
-                            swal('Erreur !', 'Tous les champs doivent être remplis !', 'error');
+                            swal('Erreur !', res['errors'][0], 'error');
                         }
                     }, 1000);
                 } else {
