@@ -371,22 +371,51 @@ var TablePartner = function () {
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" id="nom" class=" small" value="' + aData[0] + '">';
-                jqTds[1].innerHTML = '<input type="text" id="typePartenaire" class=" small" value="' + aData[1] + '">';
-                jqTds[2].innerHTML = '<input type="text" id="adresse" class=" small" value="' + aData[2] + '">';
-                jqTds[3].innerHTML = '<input type="text" id="description" class=" small" value="' + aData[3] + '">';
-                jqTds[4].innerHTML = '<input type="text" id="photo" class=" small" value="' + aData[4] + '">';
+                var id_row = nRow.id.substr(5);
+                var span_value = aData[4].split("<span>");
+                if (span_value[1])
+                {
+                    var image = span_value[1].split("</span>")[0];
+                }
+                else
+                {
+                    var image = ""
+                }
+                jqTds[1].style.width = "10%";
+                jqTds[4].style.width = "30%";
+                jqTds[0].innerHTML = '<input type="text" id="nom" name="nom" class=" small" value="' + aData[0] + '">';
+                jqTds[1].innerHTML = '<select id="typePartenaire" name="typePartenaire" class=" small" style="display:none;">'+
+                                            '<option value="Parrain" ' + (aData[1] == "Parrain" ? "selected" : "") + '>Parrain</option>'+
+                                            '<option value="Partenaire" ' + (aData[1] == "Partenaire" ? "selected" : "") + '>Partenaire</option>'+
+                                            '<option value="Avantage" ' + (aData[1] == "Avantage" ? "selected" : "") +  '>Avantage</option>'+
+                                        '</select>';
+                jqTds[2].innerHTML = '<input type="text" id="adresse" name="adresse" class=" small" value="' + aData[2] + '">';
+                jqTds[3].innerHTML = '<textarea id="description" name="description" class=" small materialize-textarea">' + aData[3] + '</textarea>';
+                jqTds[4].innerHTML = " <div class='file-field input-field'>"+
+                                            "<div class='btn'>"+
+                                                "<span>File</span>"+
+                                                "<input type='file' name='logo' id='logo'>"+  
+                                            "</div>"+
+                                            "<div class='file-path-wrapper'>"+
+                                                "<input class='file-path validate' type='text' value='" + image + "'>"+
+                                            "</div>"+
+                                        "</div>";
                 jqTds[5].innerHTML = '<a class="edit" href="">Sauvegarder</a>';
                 jqTds[6].innerHTML = '<a class="cancel" href="">Annuler</a>';
+                $('select').material_select();
+                $('select').css('display', 'none');
+                $("textarea.materialize-textarea").trigger("autoresize");
             }
 
-            function saveRow(oTable, nRow) {
+            function saveRow(oTable, nRow, res) {
                 var jqInputs = $('input', nRow);
+                var textarea = $('textarea', nRow);
+                nRow.id = 'p_' + res['id'];
                 oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
                 oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
                 oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-                oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-                oTable.fnUpdate(jqInputs[4].value, nRow, 4, false);
+                oTable.fnUpdate(textarea[0].value, nRow, 3, false);
+                oTable.fnUpdate('<img src="' + res['image'] + '" style="vertical-align:middle;margin-right:5px;"><span>' + jqInputs[4].value + '</span>', nRow, 4, false);
                 oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 5, false);
                 oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 6, false);
                 oTable.fnDraw();
@@ -420,7 +449,7 @@ var TablePartner = function () {
                 },
                 "aoColumnDefs": [{
                         'bSortable': false,
-                        'aTargets': [0]
+                        'aTargets': [5,6]
                     }
                 ]
             });
@@ -447,10 +476,10 @@ var TablePartner = function () {
                 }
 
                 var nRow = $(this).parents('tr')[0];
-                var id_partenaire = nRow.id.substring(2);
+                var idP = nRow.id.substring(2);
                 $.ajax({
                     method: 'GET',
-                    url: '/partenaires/delete/' + id_partenaire
+                    url: '/partenaires/delete/' + idP
                 })
                 .done(function() {
                     oTable.fnDeleteRow(nRow);
@@ -486,65 +515,30 @@ var TablePartner = function () {
                 } else if (nEditing == nRow && this.innerHTML == "Sauvegarder") {
                     /* Editing this row and want to save it */
                     var idP = nRow.id.substring(2);
-                    if(idP.length==0)
-                    {
-                      $.ajax({
-                          method: 'GET',
-                          url: '/partenaires/create/',
-                          data: {
-                                  nom: nRow.querySelector("#nom").value,
-                                  description: nRow.querySelector("#description").value,
-                                  typePartenaire: nRow.querySelector("#typePartenaire").value,
-                                  adresse: nRow.querySelector("#adresse").value
-                                  }
-                      })
-                      .done(function(result) {
-                          var res = parseInt(result);
-                          if (res)
-                          {
-                              saveRow(oTable, nEditing);
-                              nEditing = null;
-                              swal('Partenaire créé !', 'Le partenaire a bien été créé !', 'success');
-                          }
-                          else
-                          {
-                             swal('Erreur !', 'Tous les champs doivent être remplis !', 'error');
-                          }
-                      })
-                      .fail(function() {
-                          swal('Erreur !', 'Une erreur est survenue lors de la création du partenaire !', 'error');
-                      });
-                    }
-                    else {
-                      $.ajax({
-                          method: 'GET',
-                          url: '/partenaires/update/' + idP,
-                          data: {
-                                  nom: nRow.querySelector("#nom").value,
-                                  description: nRow.querySelector("#description").value,
-                                  typePartenaire: nRow.querySelector("#typePartenaire").value,
-                                  adresse: nRow.querySelector("#adresse").value
-                                  }
-                      })
-                      .done(function(result) {
-                          var res = parseInt(result);
-                          if (res)
-                          {
-                              saveRow(oTable, nEditing);
-                              nEditing = null;
-                              swal('Partenaire mise à jour !', 'Le partenaire a bien été mit à jour !', 'success');
-                          }
-                          else
-                          {
-                             swal('Erreur !', 'Tous les champs doivent être remplis !', 'error');
-                          }
-                      })
-                      .fail(function() {
-                          swal('Erreur !', 'Une erreur est survenue lors de la mise à jour de l\'actualité !', 'error');
-                      });
-                    }
+                    var form = document.getElementById('form_partenaire');
+                    var input_id = document.createElement('input');
+                    input_id.type = "hidden";
+                    input_id.name = "id";
+                    input_id.value = idP;
+                    form.appendChild(input_id);
+                    form.submit();
+                    form.removeChild(input_id);
 
-
+                    setTimeout(function() {
+                        var frame = document.getElementById('myFrame');
+                        var result = frame.contentDocument.body.textContent;
+                        var res = JSON.parse(result);
+                        if (!res['errors'])
+                        {
+                            saveRow(oTable, nEditing, res);
+                            nEditing = null;
+                            swal('Partenaire mis à jour !', 'Le partenaire a bien été mis à jour !', 'success');
+                        }
+                        else
+                        {
+                            swal('Erreur !', res['errors'][0], 'error');
+                        }
+                    }, 1000);
                 } else {
                     /* No edit in progress - let's start one */
                     editRow(oTable, nRow);

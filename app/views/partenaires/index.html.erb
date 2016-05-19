@@ -15,9 +15,21 @@
 				<h4 class="indigo-text">Les parrains de promo</h4>
 			</div>
 		    <div class="row">
-		    	<p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
-			    <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
-			    <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+		    	<div class="container">
+			    	<p>Les parrains de promo prennent en charge une promotion complète en proposant des conférences sur des sujets variés tels que la création du CV, l'entretien, l'intelligence artificielle...</p>
+			    	<% for @parrain in @parrains %>
+			    		<div class="parrain col s12 m6">
+			    			<div class="col s12 m4 valign-wrapper">
+			    				<p class="valign center-align"><img src="<%= @parrain.logo.url(:medium) %>" class="circle"></p>
+			    			</div>
+			    			<div class="col s12 m8">
+			    				<h3><%= @parrain.nom %></h3>
+			    				<p><%= @parrain.description %></p>
+			    				<p class="small"><%= @parrain.adresse %></p>
+			    			</div>
+			    		</div>
+			    	<% end %>
+			    </div>
 		    </div>
 		</div>
 		<div id="test2" class="col s12">
@@ -26,9 +38,21 @@
 				<h4 class="indigo-text">Nos partenaires</h4>
 			</div>
 		    <div class="row">
-		    	<p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
-			    <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
-			    <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+		    	<div class="container">
+			    	<p>Les partenaires participent à l'effort du BDE par des aides financières ou matérielles, par exemple au cours d'événements organisés</p>
+			    	<% for @partenaire in @partenaires %>
+			    		<div class="parrain col s12 m6">
+			    			<div class="col s12 m4 valign-wrapper">
+			    				<p class="valign center-align"><img src="<%= @partenaire.logo.url(:medium) %>" class="circle"></p>
+			    			</div>
+			    			<div class="col s12 m8">
+			    				<h3><%= @partenaire.nom %></h3>
+			    				<p><%= @partenaire.description %></p>
+			    				<p class="small"><%= @partenaire.adresse %></p>
+			    			</div>
+			    		</div>
+			    	<% end %>
+			    </div>
 		    </div>	
 		</div>
 		<div id="test4" class="col s12">
@@ -37,9 +61,21 @@
 		    	<h4 class="indigo-text">Les avantages</h4>
 			</div>
 			<div class="row">
-		    	<p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
-			    <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
-			    <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+				<div class="container">
+					<p>Les avantages vous permettent de profiter de réductions ou d'offres spéciales en tant qu'étudiant à l'ENSIIE</p>
+			    	<% for @avantage in @avantages %>
+			    		<div class="parrain col s12 m6">
+			    			<div class="col s12 m4 valign-wrapper">
+			    				<p class="valign center-align"><img src="<%= @avantage.logo.url(:medium) %>" class="circle"></p>
+			    			</div>
+			    			<div class="col s12 m8">
+			    				<h3><%= @avantage.nom %></h3>
+			    				<p><%= @avantage.description %></p>
+			    				<p class="small"><%= @avantage.adresse %></p>
+			    			</div>
+			    		</div>
+			    	<% end %>
+			    </div>
 		    </div>		    
 		</div>
 		</div>

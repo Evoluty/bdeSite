@@ -5,6 +5,8 @@ class CreatePartenaires < ActiveRecord::Migration
       t.string :typePartenaire
       t.string :adresse
       t.string :description
+      t.attachment :logo
+      
       t.timestamps null: false
     end
   end
