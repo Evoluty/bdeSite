@@ -1,28 +1,33 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ce site correspond au site principal qui représente le BDE de l'ENSIIE de l'université de strasbourg.
+Il s'agit principalement d'un site vitrine, avec une gestion intégrée des clubs, users, membres du bde, partenaires,etc...
 
-Things you may want to cover:
+Afin de pouvoir installer ce site, voici les quelques poins nécessaires à vérifier:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+(Une version d'exemple du site tourne actuellement sur bubuntu.ddns.net)
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Version de ruby
+--> 2.3.0
+
+* Création de la base de données
+--> La base de données (postgre) doit être la suivante:
+host: localhost
+database: site_db
+username: site
+password: test
+
+* Initialisation de la base de données
+--> utiliser rake db:create db:migrate db:seed
+
+* Services
+--> le backoffice est protégé:
+  - y accéder: /admin    (possibilité également d'utiliser le lien dans le footer)
+  - identifiants:
+    --> user: bde@yopmail.com
+    --> pswd: testtest
+
+* Autre
+--> L'intégralité des textes de la page d'accueil, ainsi que les vrais partenaires / membres du bde seront ajoutés ultérieurement
+quand le site sera en production. Ce qu'on peut voir actuellement sert uniquement pour la présentation / démonstration du projet.
