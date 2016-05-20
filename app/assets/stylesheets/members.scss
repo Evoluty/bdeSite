@@ -1,3 +1,17 @@
 // Place all the styles related to the members controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bde > p
+{
+	text-align:center;
+	margin:auto;
+	margin-bottom:20px;
+}
+
+.bde > p:first-of-type
+{
+	width:75%;
+	font-weight:bold;
+	background-color:#ee711a;
+}

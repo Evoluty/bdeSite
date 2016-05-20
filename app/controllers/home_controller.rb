@@ -1,10 +1,10 @@
 class HomeController < ApplicationController
 	def index
 		@title = "Accueil"
-		@president = Member.where(poste: 'Présidente')
-		@vicepres = Member.where(poste: 'Vice-Président')
-		@secretaire = Member.where(poste: 'Secrétaire')
-		@tresorier = Member.where(poste: 'Trésorière')
-		@other_members = Member.where.not(poste: ['Présidente', 'Vice-Président', 'Secrétaire', 'Trésorière'])
+		@president = Member.where(job: 'Présidente')
+		@vicepres = Member.where(job: 'Vice-Président')
+		@secretaire = Member.where(job: 'Secrétaire')
+		@tresorier = Member.where(job: 'Trésorière')
+		@other_members = Member.where.not(job: ['Présidente', 'Vice-Président', 'Secrétaire', 'Trésorière'])
 	end
 end

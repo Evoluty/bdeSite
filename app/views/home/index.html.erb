@@ -40,6 +40,71 @@
   <div class="col s12 center">
     <h3 class="green-text"><i class="medium material-icons">assignment_ind</i></h3>
     <h4 class="green-text">L' équipe</h4>
+    <% for @pres in @president %>
+        <div class="col s12 m4 bde">
+            <p class="job" style="height:30px">
+                <%= @pres.job %>
+            </p>
+            <p>
+              <img src="<%= @pres.photo.url(:medium) %>" class="circle">
+            </p>
+            <p>
+              <%= @pres.firstname %><%= @pres.name %>
+            </p>
+        </div>
+    <% end %>
+    <% for @vice in @vicepres %>
+        <div class="col s12 m4 bde">
+            <p class="job" style="height:30px">
+                <%= @vicepres.job %>
+            </p>
+            <p>
+              <img src="<%= @vicepres.photo.url(:medium) %>" class="circle">
+            </p>
+            <p>
+              <%= @vicepres.firstname %><%= @vicepres.name %>
+            </p>
+        </div>
+    <% end %>
+    <% for @tres in @tresorier %>
+        <div class="col s12 m4 bde">
+            <p class="job" style="height:30px">
+                <%= @tres.job %>
+            </p>
+            <p>
+              <img src="<%= @tres.photo.url(:medium) %>" class="circle">
+            </p>
+            <p>
+              <%= @tres.firstname %><%= @tres.name %>
+            </p>
+        </div>
+    <% end %>
+    <% for @secr in @secretaire %>
+        <div class="col s12 m4 bde">
+            <p class="job" style="height:30px">
+                <%= @secr.job %>
+            </p>
+            <p>
+              <img src="<%= @secr.photo.url(:medium) %>" class="circle">
+            </p>
+            <p>
+              <%= @secr.firstname %><%= @secr.name %>
+            </p>
+        </div>
+    <% end %>
+    <% for @member in @other_members %>
+        <div class="col s12 m4 bde">
+            <p class="job" style="height:30px">
+                <%= @member.job %>
+            </p>
+            <p>
+              <img src="<%= @member.photo.url(:medium) %>" class="circle">
+            </p>
+            <p>
+              <%= @member.firstname %><%= @member.name %>
+            </p>
+        </div>
+    <% end %>
   </div>
 </div>
 </div>
