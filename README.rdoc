@@ -18,6 +18,9 @@ database: site_db
 username: site
 password: test
 
+* Initialisation des gems
+--> faire un : bundle install
+
 * Initialisation de la base de données
 --> utiliser rake db:create db:migrate db:seed
 
