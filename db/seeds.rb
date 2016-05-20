@@ -6,6 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Club.create(nom: 'test', description: 'hello ce club est trop bien !')
-Member.create(name: 'bde', firstname: 'bde', email: 'bde@yopmail.com', password_digest: '$2a$10$Lu2B6mwpt63Z5S6IMg5d7u8IeKoAwxH00mWflyQp37XvGt1Ltueiq')
+Club.create(nom: 'test', description: 'hello ce club est trop bien !', president: 'Président')
+Member.create(name: 'bde', firstname: 'bde', email: 'bde@yopmail.com', role: 'Administrateur', password_digest: '$2a$10$Lu2B6mwpt63Z5S6IMg5d7u8IeKoAwxH00mWflyQp37XvGt1Ltueiq')
 Partenaire.create(nom: 'test', typePartenaire: 'argent', description: 'hello ce club est trop bien !', adresse: '11 rdv')

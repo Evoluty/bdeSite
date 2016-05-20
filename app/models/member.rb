@@ -8,6 +8,6 @@ class Member < ActiveRecord::Base
 	validates :name, :presence => true, :length => { :in => 3..20 }
 	validates :firstname, :presence => true, :length => { :in => 3..20 }
 	validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
-	validates :password, :confirmation => true
-	validates_length_of :password, :in => 6..40, :on => :create
+	#validates :password, :confirmation => true
+	#validates_length_of :password, :in => 6..40, :on => :create
 end
