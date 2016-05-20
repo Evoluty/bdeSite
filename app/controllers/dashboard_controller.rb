@@ -13,10 +13,10 @@ class DashboardController < ApplicationController
   def index
   	@title = "Administration - Tableau de bord"
   	@news = News.all()
-  	@member = Member.new
-  	@clubs = Club.all()
-  	@partenaires = Partenaire.all()
     @members = Member.all()
+    @clubs = Club.all()
+    @partenaires = Partenaire.all()
+    @user_role = Member.find(session[:user]).role
   end
 
 end
