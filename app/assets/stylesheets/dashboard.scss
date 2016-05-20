@@ -24,14 +24,17 @@
 	margin-top: 20px;
 }
 
-#dashTab ul.tabs
+#dashTab ul.tabs, #dashTab a
 {
-	background-color: #f5f5f5;
+	background-color: #424242;
+	color: white;
+	border-bottom: 1px solid white;
 }
 
 #dashTab ul.tabs li a.active
 {
-	background-color: #ffab91;
+	background-color: #D1D1D1;
+	color: black;
 }
 
 select
