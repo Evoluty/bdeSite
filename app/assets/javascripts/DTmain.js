@@ -84,7 +84,7 @@ var TableBDE = function () {
             $('#editable-sample-bde_new').click(function (e) {
                 e.preventDefault();
                 var aiNew = oTable.fnAddData(['', '', '', '',
-                        '<a class="edit" href="">Editer</a>', '<a class="cancel" data-mode="new" href="">Cancel</a>'
+                        '<a class="edit" href="">Editer</a>', '<a class="cancel" data-mode="new" href="">Annuler</a>'
                 ]);
                 var nRow = oTable.fnGetNodes(aiNew[0]);
                 editRow(oTable, nRow);
@@ -249,7 +249,7 @@ var TableClub = function () {
             $('#editable-sample-club_new').click(function (e) {
                 e.preventDefault();
                 var aiNew = oTable.fnAddData(['', '', '', '',
-                        '<a class="edit" href="">Editer</a>', '<a class="cancel" data-mode="new" href="">Cancel</a>'
+                        '<a class="edit" href="">Editer</a>', '<a class="cancel" data-mode="new" href="">Annuler</a>'
                 ]);
                 var nRow = oTable.fnGetNodes(aiNew[0]);
                 editRow(oTable, nRow);
@@ -424,7 +424,7 @@ var TablePartner = function () {
             $('#editable-sample-partner_new').click(function (e) {
                 e.preventDefault();
                 var aiNew = oTable.fnAddData(['', '', '', '', '',
-                        '<a class="edit" href="">Editer</a>', '<a class="cancel" data-mode="new" href="">Cancel</a>'
+                        '<a class="edit" href="">Editer</a>', '<a class="cancel" data-mode="new" href="">Annuler</a>'
                 ]);
                 var nRow = oTable.fnGetNodes(aiNew[0]);
                 editRow(oTable, nRow);
@@ -628,7 +628,7 @@ var TableNews = function () {
             $('#editable-sample-news_new').click(function (e) {
                 e.preventDefault();
                 var aiNew = oTable.fnAddData(['', '', '', '',
-                        '<a class="edit" href="">Editer</a>', '<a class="cancel" data-mode="new" href="">Cancel</a>'
+                        '<a class="edit" href="">Editer</a>', '<a class="cancel" data-mode="new" href="">Annuler</a>'
                 ]);
                 var nRow = oTable.fnGetNodes(aiNew[0]);
                 editRow(oTable, nRow);

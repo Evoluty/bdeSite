@@ -13,4 +13,6 @@ $(document).ready(function () {
 				TableClub.init();
 			  TablePartner.init();
 			  TableNews.init();
+	$('select').material_select();
+	$('select').css('display', 'none');
 });

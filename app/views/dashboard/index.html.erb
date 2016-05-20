@@ -1,15 +1,31 @@
 <iframe name="myFrame" id="myFrame" style="display:none;">
 	<div>test</div>
 </iframe>
+<span>
+
+
+<a href="/admin/loggout" class="white" style="color: white">
+<i class="small material-icons" style="position: fixed; right: 10px;  top: 15px; z-index: 1000">input</i>
+</a>
+
 <div class="row" id="dashMain">
 	<div class="col">
 		<div id="dashTab">
 		  <ul class="tabs">
-		    <li class="tab"><a href="#test1" class="active col">News</a></li>
+			<% if @user_role == "Editeur" || @user_role == "Administrateur" %>
+				<li class="tab"><a href="#test1" class="active col">News</a></li>
+			<% end %>
+
+
 		    <li class="tab"><a href="#test2" class="col">Clubs</a></li>
-		    <li class="tab"><a href="#test3" class="col">Partenaires</a></li>
-		    <li class="tab"><a href="#test4" class="col">Bde</a></li>
-		    <li class="tab"><a href="#inscription" class="col">Inscription</a></li>
+
+		    <% if @user_role == "Editeur" || @user_role == "Administrateur" %>
+		    	<li class="tab"><a href="#test3" class="col">Partenaires</a></li>
+		    <% end %>
+		    <% if @user_role == "Administrateur" %>
+			    <li class="tab"><a href="#test4" class="col">Bde</a></li>
+			    <li class="tab"><a href="#inscription" class="col">Inscription</a></li>
+		    <% end %>
 		  </ul>
 		</div>
 	</div>
@@ -26,25 +42,31 @@
 			</script>
 		<% end -%>
 
-		<div id="test1" class="col s12">
-			<%= render "dashboard/news" %>
-		</div>
+		<% if @user_role == "Editeur" || @user_role == "Administrateur" %>
+			<div id="test1" class="col s12">
+				<%= render "dashboard/news" %>
+			</div>
+		<% end %>
 
 		<div id="test2" class="col s12">
 			<%= render "dashboard/clubs" %>
 		</div>
 
-		<div id="test3" class="col s12">
-			<%= render "dashboard/partenaires" %>
-		</div>
+		<% if @user_role == "Editeur" || @user_role == "Administrateur" %>
+			<div id="test3" class="col s12">
+				<%= render "dashboard/partenaires" %>
+			</div>
+		<% end %>
 
-		<div id="test4" class="col s12">
-			<%= render "dashboard/bde" %>
-		</div>
+		<% if @user_role == "Administrateur" %>
+			<div id="test4" class="col s12">
+				<%= render "dashboard/bde" %>
+			</div>
 
-		<div id="inscription" class="col s12">
-			<%= render "dashboard/inscription" %>
-		</div>
+			<div id="inscription" class="col s12">
+				<%= render "dashboard/inscription" %>
+			</div>
+		<% end %>
 		
 	</div>
 </div>

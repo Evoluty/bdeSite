@@ -27,27 +27,32 @@ $(document).on 'page:change', ->
     return
 
   sendMail = ->
-      token = document.querySelector('input[name="authenticity_token"]');
-      $.ajax(
-        method: 'POST'
-        url: '/contact/send'
-        data:
-          authenticity_token: token.value
-          name: name.value
-          objet: objet.value
-          mail: mail.value
-          msg: msg.value)
-        .done(->
-          swal 'Message envoyé !', 'Nous vous répondrons dans les plus bref délais', 'success'
-          sweetButton = document.getElementsByClassName('confirm')[0]
-          sweetButton.addEventListener 'click', sweetValidate  
-          )
-        .fail ->
-          swal 'Erreur !', 'Le message n\'a pas pu être envoyé !', 'error'
-        return
+      token = document.querySelector('input[name="authenticity_token"]')
+      captcha = document.getElementById('g-recaptcha-response')
+      if captcha and captcha.value != ''
+        captcha_value = captcha.value
+        $.ajax(
+          method: 'POST'
+          url: '/contact/send'
+          data:
+            authenticity_token: token.value
+            captcha: captcha_value
+            name: name.value
+            objet: objet.value
+            mail: mail.value
+            msg: msg.value)
+          .done(->
+            swal 'Message envoyé !', 'Nous vous répondrons dans les plus bref délais', 'success'
+            sweetButton = document.getElementsByClassName('confirm')[0]
+            sweetButton.addEventListener 'click', sweetValidate  
+            )
+          .fail ->
+            swal 'Erreur !', 'Le message n\'a pas pu être envoyé !', 'error'
+      else
+        swal 'Erreur !', 'Veuillez remplir le captcha !', 'error'
+      return
 
   sweetValidate = ->
-    window.location = "/"
     return
 
   if window.location.pathname == '/contact'

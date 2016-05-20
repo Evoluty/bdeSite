@@ -33,12 +33,12 @@
               </tr>
               </thead>
               <tbody>
-                  <% for @club in @clubs %>
-                      <tr id="club_<%= @club.id.to_s %>">
-                          <td><%= @club.nom %></td>
-                          <td><%= @club.description %></td>
-                          <td><%= @club.president %></td>
-                          <td style="width:30%;"><img src="<%= @club.image_club.url(:thumb) %>" style="margin-right:5px;vertical-align:middle;"/><span><%= @club.image_club_file_name %></span></td>
+                  <% for club in @clubs %>
+                      <tr id="club_<%= club.id.to_s %>">
+                          <td style="width:10%;"><%= club.nom %></td>
+                          <td style="width:25%;"><%= club.description %></td>
+                          <td><%= club.president %></td>
+                          <td style="width:30%;"><img src="<%= club.image_club.url(:thumb) %>" style="margin-right:5px;vertical-align:middle;"/><span><%= club.image_club_file_name %></span></td>
                           <td><a class="edit" href="javascript:;">Editer</a></td>
                           <td><a class="delete" id="editable-sample-club" href="">Supprimer</a></td>
                       </tr>
