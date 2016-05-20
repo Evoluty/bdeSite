@@ -6,6 +6,6 @@ class HomeController < ApplicationController
 		@secretaire = Member.where(job: 'Secrétaire')
 		@tresorier = Member.where(job: 'Trésorière')
 		@vicetresorier = Member.where(job: 'Vice-Trésorier')
-		@other_members = Member.where.not(job: ['Présidente', 'Vice-Président', 'Secrétaire', 'Trésorière', ""])
+		@other_members = Member.where.not(job: ['Présidente', 'Vice-Président', 'Secrétaire', 'Trésorière', 'Vice-Trésorier', ""])
 	end
 end
