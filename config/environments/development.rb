@@ -43,4 +43,7 @@ Rails.application.configure do
     config.api_key = 'key-f6bf95c55c85b180470211e9d1b9c108'
   end
 
+  # Paperclip config:
+  Paperclip.options[:image_magick_path] = "/opt/ImageMagick/bin"
+  Paperclip.options[:command_path] = "/opt/ImageMagick/bin"
 end

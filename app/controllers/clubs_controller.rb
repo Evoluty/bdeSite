@@ -1,7 +1,7 @@
 class ClubsController < ApplicationController
   def index
     @title = "Les Clubs"
-  	@clubs = Club.all()
+  	@clubs = Club.all().order("nom")
   end
 
   def delete

@@ -14,6 +14,17 @@
 	box-shadow: 0 1px 0 0 #ffc107;
 }
 
+.input-field input[type=email]:focus + label 
+{
+  color: #ffc107;
+}
+
+.input-field input[type=email]:focus 
+{
+  border-bottom: 1px solid #ffc107;
+  box-shadow: 0 1px 0 0 #ffc107;
+}
+
 /* Textarea focus and label */
 .input-field textarea:focus:not([readonly]) + label 
 {
@@ -38,7 +49,7 @@ img.circle
   height: 100px;
 }
 
-img.circle:hover
+.contact:hover
 {
   border: solid 1px #CCC;
   -moz-box-shadow: 2px 2px 0px #999; 
