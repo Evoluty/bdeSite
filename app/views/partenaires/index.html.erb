@@ -14,22 +14,20 @@
 				<h3 class="indigo-text"><i class="medium material-icons">perm_identity</i></h3>
 				<h4 class="indigo-text">Les parrains de promo</h4>
 			</div>
-		    <div class="row">
-		    	<div class="container">
-			    	<p>Les parrains de promo prennent en charge une promotion complète en proposant des conférences sur des sujets variés tels que la création du CV, l'entretien, l'intelligence artificielle...</p>
-			    	<% for @parrain in @parrains %>
-			    		<div class="parrain col s12 m6">
-			    			<div class="col s12 m4 valign-wrapper">
-			    				<p class="valign center-align"><img src="<%= @parrain.logo.url(:medium) %>" class="circle"></p>
-			    			</div>
-			    			<div class="col s12 m8">
-			    				<h3><%= @parrain.nom %></h3>
-			    				<p><%= @parrain.description %></p>
-			    				<p class="small"><%= @parrain.adresse %></p>
-			    			</div>
-			    		</div>
-			    	<% end %>
-			    </div>
+		    <div class="row center">
+		    	<p>Les parrains de promo prennent en charge une promotion complète en proposant des conférences sur des sujets variés tels que la création du CV, l'entretien, l'intelligence artificielle...</p>
+		    	<% for @parrain in @parrains %>
+		    		<div class="parrain col s12 m6">
+		    			<div class="col s12 m4 valign-wrapper">
+		    				<p class="valign center-align"><img src="<%= @parrain.logo.url(:medium) %>" class="circle"></p>
+		    			</div>
+		    			<div class="col s12 m8">
+		    				<h3><%= @parrain.nom %></h3>
+		    				<p><%= simple_format(@parrain.description) %></p>
+		    				<p class="small"><%= @parrain.adresse %></p>
+		    			</div>
+		    		</div>
+		    	<% end %>
 		    </div>
 		</div>
 		<div id="test2" class="col s12">
@@ -37,22 +35,20 @@
 				<h3 class="indigo-text"><i class="medium material-icons">contacts</i></h3>
 				<h4 class="indigo-text">Nos partenaires</h4>
 			</div>
-		    <div class="row">
-		    	<div class="container">
-			    	<p>Les partenaires participent à l'effort du BDE par des aides financières ou matérielles, par exemple au cours d'événements organisés</p>
-			    	<% for @partenaire in @partenaires %>
-			    		<div class="parrain col s12 m6">
-			    			<div class="col s12 m4 valign-wrapper">
-			    				<p class="valign center-align"><img src="<%= @partenaire.logo.url(:medium) %>" class="circle"></p>
-			    			</div>
-			    			<div class="col s12 m8">
-			    				<h3><%= @partenaire.nom %></h3>
-			    				<p><%= @partenaire.description %></p>
-			    				<p class="small"><%= @partenaire.adresse %></p>
-			    			</div>
-			    		</div>
-			    	<% end %>
-			    </div>
+		    <div class="row center">
+		    	<p>Les partenaires participent à l'effort du BDE par des aides financières ou matérielles, par exemple au cours d'événements organisés</p>
+		    	<% for @partenaire in @partenaires %>
+		    		<div class="parrain col s12 m6">
+		    			<div class="col s12 m4 valign-wrapper">
+		    				<p class="valign center-align"><img src="<%= @partenaire.logo.url(:medium) %>" class="circle"></p>
+		    			</div>
+		    			<div class="col s12 m8">
+		    				<h3><%= @partenaire.nom %></h3>
+		    				<p><%= simple_format(@partenaire.description) %></p>
+		    				<p class="small"><%= @partenaire.adresse %></p>
+		    			</div>
+		    		</div>
+		    	<% end %>
 		    </div>	
 		</div>
 		<div id="test4" class="col s12">
@@ -60,22 +56,20 @@
 				<h3 class="indigo-text"><i class="medium material-icons">trending_up</i></h3>
 		    	<h4 class="indigo-text">Les avantages</h4>
 			</div>
-			<div class="row">
-				<div class="container">
-					<p>Les avantages vous permettent de profiter de réductions ou d'offres spéciales en tant qu'étudiant à l'ENSIIE</p>
-			    	<% for @avantage in @avantages %>
-			    		<div class="parrain col s12 m6">
-			    			<div class="col s12 m4 valign-wrapper">
-			    				<p class="valign center-align"><img src="<%= @avantage.logo.url(:medium) %>" class="circle"></p>
-			    			</div>
-			    			<div class="col s12 m8">
-			    				<h3><%= @avantage.nom %></h3>
-			    				<p><%= @avantage.description %></p>
-			    				<p class="small"><%= @avantage.adresse %></p>
-			    			</div>
-			    		</div>
-			    	<% end %>
-			    </div>
+			<div class="row center">
+				<p>Les avantages vous permettent de profiter de réductions ou d'offres spéciales en tant qu'étudiant à l'ENSIIE</p>
+		    	<% for @avantage in @avantages %>
+		    		<div class="parrain col s12 m6">
+		    			<div class="col s12 m4 valign-wrapper">
+		    				<p class="valign center-align"><img src="<%= @avantage.logo.url(:medium) %>" class="circle"></p>
+		    			</div>
+		    			<div class="col s12 m8">
+		    				<h3><%= @avantage.nom %></h3>
+		    				<p><%= simple_format(@avantage.description) %></p>
+		    				<p class="small"><%= @avantage.adresse %></p>
+		    			</div>
+		    		</div>
+		    	<% end %>
 		    </div>		    
 		</div>
 		</div>

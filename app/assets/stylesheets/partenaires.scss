@@ -11,6 +11,8 @@
 {
 	border:2px solid grey;
 	min-height:250px;
+	max-height:250px;
+	overflow:auto;
 }
 
 .parrain > div:first-of-type
@@ -29,5 +31,6 @@
 	.parrain > div
 	{
 		min-height:100%;
+		max-height:100%;
 	}
 }
