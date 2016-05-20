@@ -19,4 +19,9 @@ class DashboardController < ApplicationController
     @user_role = Member.find(session[:user]).role
   end
 
+  def loggout
+    session[:user] = nil
+    redirect_to root_path
+  end
+
 end
