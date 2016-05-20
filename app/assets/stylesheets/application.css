@@ -55,7 +55,7 @@ footer > div > div > div > img
 
 .dropdown-content 
 {
-  background-color: #FFFFFF;
+  background-color: #424242;
   margin: 0;
   display: none;
   min-width: 7vw;
@@ -67,6 +67,16 @@ footer > div > div > div > img
   white-space: nowrap;
   z-index: 1;
   will-change: width, height;
+}
+
+.dropdown-content li>a, .dropdown-content li>span
+{
+  color: white;
+}
+
+.dropdown-content li>a:hover, .dropdown-content li>span:hover
+{
+  color: black;
 }
 
 /* Size of dropdown content for smaller screens */
