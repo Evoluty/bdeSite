@@ -34,9 +34,9 @@ class PartenairesController < ApplicationController
     end
 
     if (p.save())
-      render :json => {"image": p.logo.url(:thumb), "id": p.id}
+      render :json => {image: p.logo.url(:thumb), id: p.id}
     else
-      render :json => {"errors": p.errors.full_messages}
+      render :json => {errors: p.errors.full_messages}
     end
   end
 end

@@ -32,9 +32,9 @@ class ClubsController < ApplicationController
       c.image_club = photo
     end
     if (c.save())
-        render :json => {"image": c.image_club.url(:thumb), "id": c.id}
+        render :json => {image: c.image_club.url(:thumb), id: c.id}
     else
-        render :json => {"errors": c.errors.full_messages}
+        render :json => {errors: c.errors.full_messages}
     end
   end
 end

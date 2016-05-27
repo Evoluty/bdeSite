@@ -51,9 +51,9 @@ class MembersController < ApplicationController
 	    end
 
 	    if (m.save())
-	      render :json => {"image": m.photo.url(:thumb), "id": m.id}
+	      render :json => {image: m.photo.url(:thumb), id: m.id}
 	    else
-	      render :json => {"errors": m.errors.full_messages}
+	      render :json => {errors: m.errors.full_messages}
 	    end
     end
 
