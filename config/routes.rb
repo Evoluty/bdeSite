@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   # Admin
   get '/admin' => 'dashboard#index'
-  get '/admin/loggout' => 'dashboard#loggout'
+  get '/admin/logout' => 'dashboard#logout'
 
   # Clubs
   get '/clubs' => 'clubs#index'

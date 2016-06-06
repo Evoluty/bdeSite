@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518184714) do
+ActiveRecord::Schema.define(version: 20160602122941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,13 +28,21 @@ ActiveRecord::Schema.define(version: 20160518184714) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "jobs", force: :cascade do |t|
+    t.string   "M"
+    t.string   "F"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "members", force: :cascade do |t|
     t.string   "firstname"
     t.string   "name"
+    t.string   "sexe"
     t.string   "email"
     t.string   "password_digest"
-    t.string   "job"
-    t.string   "role"
+    t.integer  "role_id"
+    t.integer  "job_id"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
@@ -42,6 +50,9 @@ ActiveRecord::Schema.define(version: 20160518184714) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
+
+  add_index "members", ["job_id"], name: "index_members_on_job_id", using: :btree
+  add_index "members", ["role_id"], name: "index_members_on_role_id", using: :btree
 
   create_table "news", force: :cascade do |t|
     t.string   "title"
@@ -61,6 +72,12 @@ ActiveRecord::Schema.define(version: 20160518184714) do
     t.datetime "logo_updated_at"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

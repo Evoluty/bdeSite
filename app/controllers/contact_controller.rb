@@ -11,7 +11,7 @@ class ContactController < ApplicationController
     mail = params[:mail]
     objet = params[:objet]
     msg = params[:msg]
-    params = {'secret' => '6LeYeSATAAAAAP18IT1Ba3vPUwdlHlg25D4EUdIa',
+    params = {'secret' => '6LcyKiETAAAAAO4ZtneYH0UcZEsMfG1WfpCwNGYN',
     'response' => captcha
     }
     x = Net::HTTP.post_form(URI.parse('https://www.google.com/recaptcha/api/siteverify'), params)

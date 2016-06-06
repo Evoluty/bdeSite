@@ -43,75 +43,10 @@
   </div>
 </div> 
 <div class="row" style="margin-top: 5%">
-    <% for pres in @president %>
+    <% for member in @members %>
         <div class="col s12 m4 bde">
             <p class="job" style="height:30px">
-                <%= pres.job %>
-            </p>
-            <p>
-              <img src="<%= pres.photo.url(:medium) %>">
-            </p>
-            <p>
-              <%= pres.firstname %> <%= pres.name %>
-            </p>
-        </div>
-    <% end %>
-    <% for vice in @vicepres %>
-        <div class="col s12 m4 bde">
-            <p class="job" style="height:30px">
-                <%= vice.job %>
-            </p>
-            <p>
-              <img src="<%= vice.photo.url(:medium) %>">
-            </p>
-            <p>
-              <%= vice.firstname %> <%= vice.name %>
-            </p>
-        </div>
-    <% end %>
-    <% for tres in @tresorier %>
-        <div class="col s12 m4 bde">
-            <p class="job" style="height:30px">
-                <%= tres.job %>
-            </p>
-            <p>
-              <img src="<%= tres.photo.url(:medium) %>">
-            </p>
-            <p>
-              <%= tres.firstname %> <%= tres.name %>
-            </p>
-        </div>
-    <% end %>
-    <% for vicetres in @vicetresorier %>
-        <div class="col s12 m4 bde">
-            <p class="job" style="height:30px">
-                <%= vicetres.job %>
-            </p>
-            <p>
-              <img src="<%= vicetres.photo.url(:medium) %>">
-            </p>
-            <p>
-              <%= vicetres.firstname %> <%= vicetres.name %>
-            </p>
-        </div>
-    <% end %>
-    <% for secr in @secretaire %>
-        <div class="col s12 m4 bde">
-            <p class="job" style="height:30px">
-                <%= secr.job %>
-            </p>
-            <p>
-              <img src="<%= secr.photo.url(:medium) %>">
-            </p>
-            <p>
-              <%= secr.firstname %> <%= secr.name %>
-            </p>
-        </div>
-    <% end %>
-    <% for member in @other_members %>
-        <div class="col s12 m4 bde">
-            <p class="job" style="height:30px">
-                <%= member.job %>
+                <%= member.job[member.sexe] %>
             </p>
             <p>
               <img src="<%= member.photo.url(:medium) %>">

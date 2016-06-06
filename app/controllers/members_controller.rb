@@ -35,26 +35,38 @@ class MembersController < ApplicationController
     	id = params[:id]
 	    name = params[:name]
 	    firstname = params[:firstname]
+	    sexe = params[:sexe]
 	    email = params[:email]
 	    role = params[:role]
-	   	job = params[:job]
+	   	job_id = params[:job]
+	   	if (job_id.to_i == 0)
+	   		other_job = params[:other_job].split.map(&:capitalize).join(' ').titleize
+	   		j = Job.new
+	 		j.M = other_job
+	 		j.F = other_job
+	 		if (!j.save())
+	 			render :json => {errors: j.errors.full_messages} and return
+	 		end
+	 		job_id = j.id
+	 	end
 	    photo = params[:photo]
 
 	    m = Member.find(id)
 	    m.name = name
 	    m.firstname = firstname
+	    m.sexe = sexe
 	    m.email = email
-	    m.role = role
-	    m.job = job
+	    m.role_id = role
+	    m.job_id = job_id
 	    if (!photo.nil?)
 	      m.photo = photo
 	    end
 
 	    if (m.save())
-	      render :json => {image: m.photo.url(:thumb), id: m.id}
+	      render :json => {image: m.photo.url(:thumb), id: m.id, job: other_job, job_id: job_id.to_i}
 	    else
 	      render :json => {errors: m.errors.full_messages}
-	    end
+	    end	
     end
 
     def delete

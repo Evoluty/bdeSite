@@ -20,7 +20,7 @@ var TableBDE = function () {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
                 var id_row = nRow.id.substr(2);
-                var span_value = aData[5].split("<span>");
+                var span_value = aData[6].split("<span>");
                 if (span_value[1])
                 {
                     var image = span_value[1].split("</span>")[0];
@@ -31,21 +31,42 @@ var TableBDE = function () {
                 }
                 jqTds[0].style.width = "10%";
                 jqTds[1].style.width = "10%";
-                jqTds[2].style.width = "10%";
+                jqTds[2].style.width = "5%";
                 jqTds[3].style.width = "10%";
-                jqTds[5].style.width = "25%";
-                jqTds[6].style.width = "10%";
+                jqTds[4].style.width = "10%";
+                jqTds[6].style.width = "25%";
                 jqTds[7].style.width = "10%";
+                jqTds[8].style.width = "10%";
+                var opt_roles = '';
+                for(var i = 0; i < roles.length; i++)
+                {
+                    opt_roles += '<option value="' + roles[i].id + '"' + (aData[4] == roles[i].name ? "selected" : "") + '>' + roles[i].name + '</option>';
+                }
+
                 jqTds[0].innerHTML = '<input type="text" id="name" name="name" class=" small" value="' + aData[0] + '">';
                 jqTds[1].innerHTML = '<input type="text" id="firstname" name="firstname" class=" small" value="' + aData[1] + '">';
-                jqTds[2].innerHTML = '<input type="email" id="email" name="email" class=" small" value="' + aData[2] + '">';
-                jqTds[3].innerHTML = '<select id="role" name="role" class=" small" style="display:none;">'+
-                                        '<option value="Membre" ' + (aData[3] == "Membre" ? "selected" : "") + '>Membre</option>'+
-                                        '<option value="Editeur" ' + (aData[3] == "Editeur" ? "selected" : "") + '>Editeur</option>'+
-                                        '<option value="Administrateur" ' + (aData[3] == "Administrateur" ? "selected" : "") +  '>Administrateur</option>'+
+                jqTds[2].innerHTML = '<select id="sexe" name="sexe" class=" small" style="display:none;">'+
+                                        '<option value="F"' + (aData[2] == "F" ? "selected" : "") + '>F</option>' +
+                                        '<option value="M"' + (aData[2] == "M" ? "selected" : "") + '>M</option>' +
                                     '</select>';
-                jqTds[4].innerHTML = '<input type="text" id="job" name="job" class=" small" value="' + aData[4] + '">';
-                jqTds[5].innerHTML = "<div class='file-field input-field'>"+
+                jqTds[3].innerHTML = '<input type="email" id="email" name="email" class=" small" value="' + aData[3] + '">';
+                jqTds[4].innerHTML = '<select id="role" name="role" class=" small" style="display:none;">'+
+                                        opt_roles +
+                                    '</select>';
+                var select_sexe = document.getElementById('sexe');
+                $('#sexe').on('change', changeJobs);
+                var sexe = select_sexe.value;
+                var opt_jobs = '';
+                for(var i = 0; i < jobs.length; i++)
+                {
+                    opt_jobs += '<option value="' + jobs[i].id + '"' + (aData[5] == jobs[i][sexe] ? "selected" : "") + '>' + jobs[i][sexe] + '</option>';
+                }
+                opt_jobs += '<option value="0">Autre</option>';
+                jqTds[5].innerHTML = '<select id="job" name="job" class=" small" style="display:none;">'+
+                                        opt_jobs +
+                                    '</select><input id="other_job" name="other_job" type="text" style="display:none;"/>';
+                $('#job').on('change', addOtherJob);
+                jqTds[6].innerHTML = "<div class='file-field input-field'>"+
                                             "<div class='btn'>"+
                                                 "<span>File</span>"+
                                                 "<input type='file' name='photo' id='photo'>"+  
@@ -54,11 +75,36 @@ var TableBDE = function () {
                                                 "<input class='file-path validate' type='text' value='" + image + "'>"+
                                             "</div>"+
                                         "</div>";
-                jqTds[6].innerHTML = '<a class="edit" href="">Sauvegarder</a>';
-                jqTds[7].innerHTML = '<a class="cancel" href="">Annuler</a>';
+                jqTds[7].innerHTML = '<a class="edit" href="">Sauvegarder</a>';
+                jqTds[8].innerHTML = '<a class="cancel" href="">Annuler</a>';
                 $('select').material_select();
                 $('select').css('display', 'none');
                 $("textarea.materialize-textarea").trigger("autoresize");
+            }
+
+            function changeJobs(event) {
+                var sexe = event.target.value;
+                var select_jobs = document.getElementById('job');
+                for (var i = 0; i < select_jobs.options.length-1; i++)
+                {
+                    var option = select_jobs.options[i];
+                    option.innerHTML = jobs[i][sexe];
+                }
+                $('select').material_select();
+            }
+
+            function addOtherJob(event) {
+                var select = event.target;
+                var input = document.getElementById('other_job');
+                if (select.value == 0)
+                {
+                    input.style.display = 'inline';
+                    input.focus();
+                }
+                else
+                {
+                    input.style.display = 'none';
+                }
             }
 
             function saveRow(oTable, nRow, res) {
@@ -68,9 +114,33 @@ var TableBDE = function () {
                 oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
                 oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
                 oTable.fnUpdate(jqInputs[4].value, nRow, 4, false);
-                oTable.fnUpdate('<img src="' + res['image'] + '" style="vertical-align:middle;margin-right:5px;"><span>' + jqInputs[5].value + '</span>', nRow, 5, false);
-                oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 6, false);
-                oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 7, false);
+                var select_jobs = document.getElementById('job');
+                if (select_jobs.value == 0)
+                {
+                    var i = 0;
+                    while (i < jobs.length)
+                    {
+                        var job = jobs[i];
+                        if (job['M'].localeCompare(res['job']) < 0)
+                        {
+                            i++;
+                        }
+                        else
+                        {
+                            var new_job = {id: res['job_id'], M: res['job'], F: res['job']};
+                            jobs.splice(i, 0, new_job);
+                            break;
+                        }
+                    }
+                    oTable.fnUpdate(res['job'], nRow, 5, false);
+                }
+                else
+                {
+                    oTable.fnUpdate(jqInputs[5].value, nRow, 5, false);
+                }
+                oTable.fnUpdate('<img src="' + res['image'] + '" style="vertical-align:middle;margin-right:5px;"><span>' + jqInputs[8].value + '</span>', nRow, 6, false);
+                oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 7, false);
+                oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 8, false);
                 oTable.fnDraw();
             }
 
@@ -81,7 +151,8 @@ var TableBDE = function () {
                 oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
                 oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
                 oTable.fnUpdate(jqInputs[4].value, nRow, 4, false);
-                oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 5, false);
+                oTable.fnUpdate(jqInputs[5].value, nRow, 5, false);
+                oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 6, false);
                 oTable.fnDraw();
             }
 
@@ -103,7 +174,7 @@ var TableBDE = function () {
                 },
                 "aoColumnDefs": [{
                         'bSortable': false,
-                        'aTargets': [6,7]
+                        'aTargets': [7,8]
                     }
                 ]
             });
@@ -199,7 +270,7 @@ var TableBDE = function () {
                         {
                             swal('Erreur !', res['errors'][0], 'error');
                         }
-                    }, 3000);
+                    }, 1000);
                 } else {
                     /* No edit in progress - let's start one */
                     editRow(oTable, nRow);

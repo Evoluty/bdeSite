@@ -13,13 +13,15 @@ class DashboardController < ApplicationController
   def index
   	@title = "Administration - Tableau de bord"
   	@news = News.all()
-    @members = Member.all()
+    @roles = Role.all()
+    @jobs = Job.all().order(:M)
+    @members = Member.includes(:role, :job)
     @clubs = Club.all()
     @partenaires = Partenaire.all()
-    @user_role = Member.find(session[:user]).role
+    @user_role = Member.find(session[:user]).role_id
   end
 
-  def loggout
+  def logout
     session[:user] = nil
     redirect_to root_path
   end

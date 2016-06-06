@@ -26,6 +26,7 @@
             <tr>
                 <th data-field="name">Nom</th>
                 <th data-field="firstname">Prénom</th>
+                <th data-field="sexe">Sexe</th>
                 <th data-field="mail">Mail</th>
                 <th data-field="role">Rôle</th>
                 <th data-field="job">Poste</th>
@@ -35,19 +36,29 @@
             </tr>
             </thead>
             <tbody>
-            <% for @member in @members %>
-                <tr id="m_<%= @member.id %>">
-                    <td><%= @member.name %></td>
-                    <td><%= @member.firstname %></td>
-                    <td><%= @member.email %></td>
-                    <td><%= @member.role %></td>
-                    <td><%= @member.job %></td>
-                    <td style="width:30%;"><img src="<%= @member.photo.url(:thumb) %>" style="margin-right:5px;vertical-align:middle;"/><span><%= @member.photo_file_name %></span></td>
-                    <td><a class="edit" href="javascript:;">Editer</a></td>
-                    <td><a class="delete" href="javascript:;">Supprimer</a></td>
+            <% for member in @members %>
+                <tr id="m_<%= member.id %>">
+                    <td><%= member.name %></td>
+                    <td><%= member.firstname %></td>
+                    <td><%= member.sexe %></td>
+                    <td><%= member.email %></td>
+                    <td><% if !member.role.nil? %>
+                           <%= member.role.name %>
+                        <% end %></td>
+                    <td><% if !member.job.nil? %>
+                           <%= member.job[member.sexe] %>
+                        <% end %></td>
+                    <td style="width:25%;"><img src="<%= member.photo.url(:thumb) %>" style="margin-right:5px;vertical-align:middle;"/><span><%= member.photo_file_name %></span></td>
+                    <td style="width:10%;"><a class="edit" href="javascript:;">Editer</a></td>
+                    <td style="width:10%;"><a class="delete" href="javascript:;">Supprimer</a></td>
                 </tr>
             <% end %>
             </tbody>
         </table>
     <% end %>
+
+    <script type="text/javascript">
+        var roles = <%= raw @roles.to_json %>;
+        var jobs = <%= raw @jobs.to_json %>;
+    </script>
 </div>

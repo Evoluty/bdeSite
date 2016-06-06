@@ -41,3 +41,13 @@ select
 {
 	display:block;
 }
+
+div.select-wrapper > ul
+{
+	overflow:auto;
+}
+
+.file-field .btn
+{
+	padding: 0 1rem;
+}
